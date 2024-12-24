@@ -1,9 +1,9 @@
 import React from "react";
-import { StyleSheet, TextInput, View, Text } from "react-native";
+import { StyleSheet, TextInput, View, Text, } from "react-native";
 import colors from "../../styles/colors";
 import { useFormikContext } from "formik";
 
-const Input = ({ label, name, placeholder, type="default", secureText }) => {
+const Textbox = ({ label, name, placeholder, type="default", secureText }) => {
     const { values, handleChange, errors, touched } = useFormikContext();
 
     return (
@@ -16,6 +16,9 @@ const Input = ({ label, name, placeholder, type="default", secureText }) => {
                 style={[styles.input, (errors[name] && touched[name]) && styles.error_input]}
                 secureTextEntry={secureText}
                 value={values[name]}
+                multiline={true}
+                numberOfLines={4}
+                maxLength={100}
             />
 
             { errors[name] && touched[name] && <Text style={styles.error}>{ errors[name]} </Text>}
@@ -32,6 +35,8 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         paddingHorizontal: 16,
         paddingVertical: 18,
+        height: 100,
+        textAlignVertical: "top"
     },
     label: {
         marginBottom: 8,
@@ -52,4 +57,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Input;
+export default Textbox;

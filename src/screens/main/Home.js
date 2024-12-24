@@ -2,19 +2,27 @@ import React from "react";
 import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
 import { Navbar, Search } from "../../compnents";
 import { Categories, Restaurants } from "../../containers";
+import restaurant from "../../data/restaurant";
+import food from "../../data/food";
 
-const Home = () => {
+const Home = ({navigation}) => {
     return (
         <SafeAreaView style={styles.home}>
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Navbar />
+                    <Navbar 
+                        goToCart={()=> navigation.navigate("Cart")}
+                    />
                 </View>
 
                 <ScrollView style={styles.view}>
-                    <Search />
+                    <Search handlePress={()=> navigation.navigate("Search")} />
                     <Categories />
-                    <Restaurants />
+                    <Restaurants 
+                        handlePress={(data)=> navigation.navigate("RestaurantDetails", data)}
+                        seeAll={()=> navigation.navigate("Restaurants")}
+                        restaurants={restaurant?.slice(0,2)}
+                    />
                 </ScrollView>
             </View> 
         </SafeAreaView>
@@ -28,11 +36,10 @@ const styles = StyleSheet.create({
     container: {
     },
     header: {
-        marginBottom: 16,
         padding: 24,
     },
     view: {
-        padding: 24,
+        paddingHorizontal: 24,
     },
 })
 

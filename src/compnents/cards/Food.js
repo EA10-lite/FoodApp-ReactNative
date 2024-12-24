@@ -1,26 +1,28 @@
 import React from "react";
-import { Image, StyleSheet, View, Text } from "react-native";
+import { Image, StyleSheet, View, Text, TouchableOpacity } from "react-native";
 
-const Food = ({ name, price }) => {
+const Food = ({ data, handlePress, }) => {
     return (
-        <View style={styles.food}>
-            <View style={styles.img_box}>
-                <Image 
-                    source={require("../../../assets/img/burger.jpg")} 
-                    style={styles.img}
-                />
-            </View>
+        <TouchableOpacity onPress={handlePress} style={styles.container}>
+            <View style={styles.food}>
+                <View style={styles.img_box}>
+                    <Image 
+                        src={data?.pictures[0]} 
+                        style={styles.img}
+                    />
+                </View>
 
-            <Text style={styles.name}>{name}</Text>
-            <View style={styles.row}>
-                <Text style={styles.price}>{price}$</Text>
+                <Text style={styles.name}>{data?.name}</Text>
+                <View style={styles.row}>
+                    <Text style={styles.price}>{data?.price}$</Text>
+                </View>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 
 const styles = StyleSheet.create({
-    food: {
+    container: {
         width: '47.5%',
         backgroundColor: 'white',
         borderRadius: 15,

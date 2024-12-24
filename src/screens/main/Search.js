@@ -1,115 +1,112 @@
 import React, { useState } from "react";
-import { Image, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import colors from "../../styles/colors";
+import { SafeAreaView, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { Food } from "../../compnents/cards";
+import Icon from "react-native-vector-icons/MaterialIcons";
+import SearchIcon from "react-native-vector-icons/Octicons";
+import colors from "../../styles/colors";
+import restaurant from "../../data/restaurant";
+import food from "../../data/food";
 
-const Search = () => {
+const Search = ({navigation}) => {
     const [search, setSearch] = useState("")
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.head}>
-                <View style={styles.header}>
-                    <View style={styles.left}>
-                        <View style={styles.menu}>
-                            <Image source={require("../../../assets/img/Back.png")} />
+        <SafeAreaView style={styles.search}>
+            <View style={styles.container}>
+                <View style={styles.head}>
+                    <View style={styles.header}>
+                        <View style={styles.left}>
+                            <TouchableOpacity style={styles.menu} onPress={()=> navigation.goBack()}>
+                                <Icon name="arrow-back-ios" size={18} color="#747783" />
+                            </TouchableOpacity>
+
+                            <Text style={styles.heading}>Search</Text>
                         </View>
 
-                        <Text style={styles.heading}>Search</Text>
-                    </View>
-
-                    <View style={styles.right}>
-                        <View style={styles.cart}>
-                            <Image source={require("../../../assets/img/shopping-bag.png")} style={styles.icon} />
+                        <View style={styles.right}>
+                            <TouchableOpacity style={styles.cart} onPress={()=> navigation.navigate("Cart")}>
+                                <Icon name="shopping-cart" size={20} color="#fff" />
+                            </TouchableOpacity>
                         </View>
                     </View>
-                </View>
 
-                <View style={styles.search}>
-                    <View style={styles.input_box}>
-                        <Image source={require("../../../assets/img/search-alt.png")} style={{ width: 15, height: 15 }} />
-                        <TextInput 
-                            placeholder="Search for restaurant, food etc."
-                            value={search}
-                            onChangeText={setSearch}
-                            autoFocus={true}
-                            style={styles.input}
-                        />
-
-                        { search?.length > 0 && (
-                            <Image source={require("../../../assets/img/cancel.png")} style={styles.icon} />
-                        )}
-                    </View>
-                </View>
-            </View>
-
-            <ScrollView style={styles.body}>
-                <View style={styles.field}>
-                    <Text style={styles.title}>Recent Search</Text>
-                    <View style={styles.row}>
-                        {["Burger", "Pizza", "Chicken"].map((word, index)=> (
-                            <View style={styles.recent} key={index}>
-                                <Text>{word}</Text>
-                            </View>
-                        ))}
-                    </View>
-                </View>
-
-                <View style={styles.field}>
-                    <Text style={styles.title}>Suggested Restaurants</Text>
-
-                    <View style={styles.items}>
-                        {[
-                            { name: "Spicy Burger", rating: 4.5 },
-                            { name: "Burger Burito", rating: 4.7 },
-                            { name: "Pizza Joint", rating: 4.2 }
-                        ].map((restaurant, index)=> (
-                            <View style={[styles.item, styles.restaurant, styles.row]} key={index}>
-                                <View style={styles.img_box}>
-                                    <Image source={require("../../../assets/img/restaurant.jpg")} style={styles.img} />
-                                </View>
-                                <View style={styles.details}>
-                                    <Text style={styles.name}>{ restaurant.name }</Text>
-                                    <View style={styles.row}>
-                                        <Image source={require("../../../assets/img/Star.png")} style={{ width: 15, height: 15 }} />
-                                        <Text style={styles.rating}>{restaurant.rating}</Text>  
-                                    </View>
-                                </View>
-                            </View>
-                        ))}
-                    </View>
-                </View>
-
-                <View style={styles.field}>
-                    <Text style={styles.title}>Popular Fast Food</Text>
-
-                    <View style={styles.foods}>
-                        {[
-                            { name: "Spicy Burger", price: 80 },
-                            { name: "Burger Burito", price: 100 },
-                            { name: "Pizza Joint", price: 65 }
-                        ].map((food, index)=> (
-                            <Food 
-                                key={index}
-                                name={food.name}
-                                price={food.price}
+                    <View style={styles.search_box}>
+                        <View style={styles.input_box}>
+                            <SearchIcon name="search" size={18} />
+                            <TextInput 
+                                placeholder="Search for restaurant, food etc."
+                                value={search}
+                                onChangeText={setSearch}
+                                autoFocus={true}
+                                style={styles.input}
                             />
-                        ))}
+
+                            { search?.length > 0 && (
+                                <Image source={require("../../../assets/img/cancel.png")} style={styles.icon} />
+                            )}
+                        </View>
                     </View>
                 </View>
-            </ScrollView>
 
+                <ScrollView style={styles.body}>
+                    <View style={styles.field}>
+                        <Text style={styles.title}>Recent Search</Text>
+                        <View style={styles.row}>
+                            {["Burger", "Pizza", "Chicken"].map((word, index)=> (
+                                <View style={styles.recent} key={index}>
+                                    <Text>{word}</Text>
+                                </View>
+                            ))}
+                        </View>
+                    </View>
+
+                    <View style={styles.field}>
+                        <Text style={styles.title}>Suggested Restaurants</Text>
+
+                        <View style={styles.items}>
+                            {restaurant?.slice(0,3)?.map((restaurant, index)=> (
+                                <TouchableOpacity onPress={()=> navigation.navigate("RestaurantDetails", restaurant)} key={index}>
+                                    <View style={[styles.item, styles.restaurant, styles.row]} key={index}>
+                                        <View style={styles.img_box}>
+                                            <Image src={restaurant?.pictures[0]} style={styles.img} />
+                                        </View>
+                                        <View style={styles.details}>
+                                            <Text style={styles.name}>{restaurant?.name}</Text>
+                                            <Text style={styles.address}>{restaurant?.address}</Text>  
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
+                            ))}
+                        </View>
+                    </View>
+
+                    <View style={styles.field}>
+                        <Text style={styles.title}>Popular Fast Food</Text>
+
+                        <View style={styles.foods}>
+                            {food.slice(0,4).map((food, index)=> (
+                                <Food 
+                                    key={index}
+                                    data={food}
+                                    handlePress={()=> navigation.navigate("FoodDetails", food)}
+                                />
+                            ))}
+                        </View>
+                    </View>
+                </ScrollView>
+            </View>
         </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
+    search: {
+        flex: 1
+    },
     container: {
         flex: 1,
-        backgroundColor: "#f8f8fa",
     },
     head: {
-        padding: 16,
+        padding: 24,
     },
     header: {
         display: "flex",
@@ -151,8 +148,6 @@ const styles = StyleSheet.create({
         fontWeight: 500,
         color: colors.dark,
     },
-
-    search: {},
     input_box: {
         backgroundColor: "#ECF0F4",
         padding: 16, 
@@ -174,7 +169,7 @@ const styles = StyleSheet.create({
     },
 
     body: {
-        padding: 16,
+        padding: 24,
     },
     row: {
         display: "flex",
@@ -185,6 +180,7 @@ const styles = StyleSheet.create({
     field: {
         marginBottom: 24,
     },
+    items: {},
     item: {
         marginBottom: 12
     },
@@ -210,8 +206,9 @@ const styles = StyleSheet.create({
         color: "#32343E",
         marginBottom: 3,
     },
-    rating: {
-        fontSize: 16,
+    address: {
+        fontSize: 14,
+        color: "#A0A5BA"
     },
     foods: {
         display: "flex",

@@ -3,34 +3,29 @@ import { Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import colors from "../../styles/colors";
 
 
-const Restaurant = () => {
+const Restaurant = ({ handlePress, data }) => {
     return (
-       <View style={styles.card}>
-            <View style={styles.body}>
-                <View style={styles.img} />
-            </View>
-            <View style={styles.footer}>
-                <View style={styles.details}>
-                    <Text style={styles.name}>Rose Garden Restaurant</Text>
-                    <Text style={styles.category}>Pizza - Burger - Chicken</Text>
+        <TouchableOpacity onPress={()=> handlePress(data)}>
+            <View style={styles.card}>
+                <View style={styles.body}>
+                    <View style={styles.img}>
+                        <Image src={data?.pictures[0]} style={styles.img} />
+                    </View>
                 </View>
+                <View style={styles.footer}>
+                    <View style={styles.details}>
+                        <Text style={styles.name}>{data.name}</Text>
+                        <Text style={styles.category}>{data?.address}</Text>
+                    </View>
 
-                <View style={[styles.row, styles.footer_bottom]}>
-                    <View style={[styles.row, styles.rating]}>
-                        <Image source={require("../../../assets/img/Star.png")} style={styles.icon} />
-                        <Text style={styles.p}>4.7</Text>
-                    </View>
-                    <View style={[styles.row, styles.service]}>
-                        <Image source={require("../../../assets/img/Delivery.png")} style={styles.truck} />
-                        <Text style={styles.p}>Free</Text>
-                    </View>
-                    <View style={[styles.row, styles.time]}>
-                        <Image source={require("../../../assets/img/Clock.png")} style={styles.icon} />
-                        <Text style={styles.p}>20min</Text>
+                    <View style={[styles.footer_bottom]}>
+                        { data?.categories?.map((category)=> (
+                            <Text style={styles.category} key={category}>{ category }</Text>
+                        ))}
                     </View>
                 </View>
             </View>
-       </View>
+       </TouchableOpacity>
     )
 }
 
@@ -44,7 +39,7 @@ const styles = StyleSheet.create({
         marginBottom: 12,
     },
     img: {
-        height: 137,
+        height: 157,
         backgroundColor: "#98A8B8",
         borderRadius: 15,
     },
@@ -68,7 +63,14 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     footer_bottom: {
-        gap: 24,
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "flex-end",
+        gap: 7,
+        flexWrap: "wrap",
+        width: "60%",
+        marginLeft: "40%",
+        marginTop: 23,
     },
     details: {
         marginBottom: 16,

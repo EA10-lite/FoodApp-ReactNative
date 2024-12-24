@@ -1,21 +1,25 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { Restaurant } from "../compnents/cards";
 
-
-const Restaurants = () => {
+const Restaurants = ({ handlePress, restaurants, seeAll, isPage }) => {
     return (
         <View style={styles.container}>
-            <View style={styles.head}>
-                <Text style={styles.title}>Restaurants </Text>
-                <Text style={styles.btn}>See all </Text>
-            </View>
+            { !isPage && (
+                <View style={styles.head}>
+                    <Text style={styles.title}>Restaurants </Text>
+                    <TouchableOpacity onPress={seeAll}>
+                        <Text style={styles.btn}>See all </Text>
+                    </TouchableOpacity>
+                </View>
+            )}
 
             <View style={styles.body}>
-                {[1,2].map((restaurant, index)=> (
+                {restaurants.map((restaurant, index)=> (
                     <Restaurant 
                         key={index}
                         data={restaurant}
+                        handlePress={handlePress}
                     />
                 ))}
             </View>

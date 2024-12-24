@@ -1,21 +1,26 @@
 import React from "react";
 import { StyleSheet, View, Text, Image, ScrollView } from "react-native";
-import { Category, Food } from "../../compnents/cards";
+import { Food } from "../../compnents/cards";
 import { Header } from "../../compnents/screens";
 import colors from "../../styles/colors";
+import food from "../../data/food";
 
-const Restaurant = () => {
+const Restaurant = ({navigation, route}) => {
+    const { name, address, pictures, categories, about } = route.params;
     return (
         <View style={styles.container}>
             <ScrollView style={styles.container}>
                 <View style={styles.view}>
                     <View style={styles.head}>
                         <Header 
-                            img_source={require("../../../assets/img/restaurant.jpg")}
+                            img_source={pictures[0]}
+                            goBack={()=> navigation.goBack()}
+                            name={name}
+                            type={"Restaurant"}
                         />
                         <View style={styles.details}>
-                            <Text style={styles.title}>One Place Joint</Text>
-                            <Text style={styles.subtitle}>Rose Garden  Avenue</Text>
+                            <Text style={styles.title}>{name}</Text>
+                            <Text style={styles.subtitle}>{address}</Text>
                         </View>
                     </View> 
 
@@ -35,30 +40,19 @@ const Restaurant = () => {
                             </View>
                         </View>
 
-                        <Text style={styles.desc}>Maecenas sed diam eget risus varius blandit sit amet non magna. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</Text>
+                        <Text style={styles.desc}>{about}</Text>
 
-                        <View style={[styles.row, styles.category]}>
-                            {["Burger", "Pizza", "Cheese", "Chicken"].map((category, index)=> (
-                                <Category 
-                                    category={category}
-                                    index={index}
-                                    key={index}
-                                />
-                            ))}
+                        <View style={[styles.row, styles.categories]}>
                         </View>
 
                         <View style={styles.foods}>
-                            <Text style={styles.title}>Burger (4)</Text>
+                            <Text style={styles.title}>Burger ({food.filter(item=> item.restaurant === name).length})</Text>
                             <View style={[styles.row, styles.food_list]}>
-                                {[
-                                    { name: "Burger-Burito", price: 40}, 
-                                    { name: "Sliced Burger", price: 88 },
-                                    { name: "Cheese Burger", price: 1200 },
-                                ].map((food, index)=> (
+                                {food.filter(item=> item.restaurant === name)?.map((food, index)=> (
                                     <Food
                                         key={index}
-                                        name={food.name}
-                                        price={food.price}
+                                        data={food}
+                                        handlePress={()=> navigation.navigate("FoodDetails", food)}
                                     />
                                 ))}
                             </View>
@@ -147,8 +141,18 @@ const styles = StyleSheet.create({
         color: "#A0A5BA",
         letterSpacing: 0.5,
     },
-    category: {
+    categories: {
         marginVertical: 24,
+    },
+    category: {
+        borderBlockColor: colors.grey,
+        borderRadius: 133.33,
+        borderWidth: 1,
+        paddingVertical: 8,
+        paddingHorizontal: 12,
+    },
+    category_text: {
+        fontSize: 14,
     },
     food_list: {
         gap: '5%',

@@ -1,11 +1,12 @@
 import React from "react";
-import { Image, StyleSheet, Text, TouchableOpacity} from "react-native";
+import { StyleSheet, Text, TouchableOpacity} from "react-native";
+import Icon from "react-native-vector-icons/Octicons";
 
 
-const Search = () => {
+const Search = ({ handlePress }) => {
     return (
-        <TouchableOpacity style={styles.search}>
-            <Image source={require("../../assets/img/Search.png")} style={styles.icon} />
+        <TouchableOpacity style={styles.search} onPress={handlePress}>
+            <Icon name="search" size={18} />
             <Text style={styles.placeholder}> Search for dishes, restaurants </Text>
         </TouchableOpacity>
     )

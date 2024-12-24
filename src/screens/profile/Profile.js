@@ -2,6 +2,7 @@ import React from "react";
 import { ScrollView, StyleSheet, View, Text, SafeAreaView, Image, TouchableOpacity } from "react-native";
 import { Header } from "../../compnents/profile";
 import colors from "../../styles/colors";
+import Icon from "react-native-vector-icons/MaterialIcons"
 
 const Field = ({ title, url, handlePress }) => {
     return (
@@ -13,7 +14,7 @@ const Field = ({ title, url, handlePress }) => {
                     </View>
                     <Text>{title}</Text>
                 </View>
-                <Image source={require("../../../assets/img/next.png")} style={styles.icon} />
+                <Icon name="navigate-next" size={24} color="#747783" />
             </View>
         </TouchableOpacity>
     )

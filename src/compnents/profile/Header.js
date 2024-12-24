@@ -1,5 +1,6 @@
 import React from "react";
-import { Button, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {  Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Icon from "react-native-vector-icons/MaterialIcons"
 import colors from "../../styles/colors";
 
 const Header = ({ isEditable, canEdit, goToEdit, goBack, title="Profile"}) => {
@@ -8,7 +9,7 @@ const Header = ({ isEditable, canEdit, goToEdit, goBack, title="Profile"}) => {
             <View style={[styles.nav, styles.row]}>
                 <View style={styles.row}>
                     <TouchableOpacity style={[styles.box, styles.row]} onPress={goBack}>
-                        <Image source={require("../../../assets/img/Back.png")} style={styles.icon} />
+                        <Icon name="arrow-back-ios" size={18} color="#747783" />
                     </TouchableOpacity>
                     <Text style={styles.title}>{title}</Text>
                 </View>

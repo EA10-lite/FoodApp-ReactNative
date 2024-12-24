@@ -1,15 +1,25 @@
 import React from "react";
-import { StyleSheet, View, Text, Image } from "react-native";
+import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
+import { useCartContext } from "../context/CartContext";
+import Icon from "react-native-vector-icons/MaterialIcons";
 import colors from "../styles/colors";
 
 
-const Navbar = () => {
+const Navbar = ({ goToCart}) => {
+    const { cart } = useCartContext();
+
+    let total_item = 0;
+    for(let i = 0; i < cart.length; i++) {
+        total_item += cart[i]?.quantity
+    }
+    
+
     return (
         <View>
             <View style={styles.navbar}>
                 <View style={styles.left}>
                     <View style={styles.menu}>
-                        <Image source={require("../../assets/img/Menu.png")} style={styles.icon} />
+                        <Icon name="menu" color={colors.dark} size={24} />
                      </View>
                     <View style={styles.location}>
                         <Text style={styles.location}>Deliver TO</Text>
@@ -18,9 +28,12 @@ const Navbar = () => {
                 </View>
 
                 <View style={styles.right}>
-                    <View style={styles.cart}>
-                        <Image source={require("../../assets/img/shopping-bag.png")} style={styles.icon} />
-                    </View>
+                    <TouchableOpacity style={styles.cart} onPress={goToCart}>
+                        <View style={styles.cart}>
+                            <Text style={styles.cart_count}>{total_item}</Text>
+                            <Icon name="shopping-cart" color="#fff" size={20} style={{marginTop: 12,}} />
+                        </View>
+                    </TouchableOpacity>
                 </View>
             </View>
 
@@ -88,7 +101,14 @@ const styles = StyleSheet.create({
         width: 20,
         height: 20,
         objectFit: "cover"
-    }
+    },
+    cart_count: {
+        color: colors.white,
+        fontSize: 13,
+        fontWeight: 800, 
+        position: "absolute",
+        top: 6,
+    },
 })
 
 export default Navbar;
