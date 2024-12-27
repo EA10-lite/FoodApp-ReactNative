@@ -3,13 +3,13 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import { useFavoriteContext } from "../context/FavoriteContext";
 
-const Favorites = ({name, type}) => {
+const Favorites = ({data, type}) => {
     const { toggleFavorites, isInFavorites} = useFavoriteContext();
     return (
-        <TouchableOpacity style={styles.icon} onPress={()=> toggleFavorites(name, type)}>
+        <TouchableOpacity style={styles.icon} onPress={()=> toggleFavorites(data, type)}>
             <Icon 
-                name={isInFavorites(name, type) ? "heart" : "hearto"} size={20} 
-                color={isInFavorites(name, type) ? "red" : "black"} 
+                name={isInFavorites(data.name, type) ? "heart" : "hearto"} size={20} 
+                color={isInFavorites(data.name, type) ? "red" : "black"} 
             />
         </TouchableOpacity>
     )

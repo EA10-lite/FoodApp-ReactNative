@@ -5,7 +5,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import colors from "../styles/colors";
 
 
-const Navbar = ({ goToCart}) => {
+const Navbar = ({ goToCart, goToProfile }) => {
     const { cart } = useCartContext();
 
     let total_item = 0;
@@ -18,9 +18,9 @@ const Navbar = ({ goToCart}) => {
         <View>
             <View style={styles.navbar}>
                 <View style={styles.left}>
-                    <View style={styles.menu}>
+                    <TouchableOpacity style={styles.menu} onPress={goToProfile}>
                         <Icon name="menu" color={colors.dark} size={24} />
-                     </View>
+                     </TouchableOpacity>
                     <View style={styles.location}>
                         <Text style={styles.location}>Deliver TO</Text>
                         <Text style={styles.address}>Igbe Road, Off Dr. Bakare</Text>

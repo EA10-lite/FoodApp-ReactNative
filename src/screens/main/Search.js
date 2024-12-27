@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { SafeAreaView, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { Food } from "../../compnents/cards";
+import { useCartContext } from "../../context/CartContext";
+import { Food } from "../../components/cards";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import SearchIcon from "react-native-vector-icons/Octicons";
 import colors from "../../styles/colors";
@@ -9,6 +10,13 @@ import food from "../../data/food";
 
 const Search = ({navigation}) => {
     const [search, setSearch] = useState("")
+    const { cart } = useCartContext();
+
+    let total_item = 0;
+    for(let i = 0; i < cart.length; i++) {
+        total_item += cart[i]?.quantity
+    }
+
     return (
         <SafeAreaView style={styles.search}>
             <View style={styles.container}>
@@ -23,8 +31,11 @@ const Search = ({navigation}) => {
                         </View>
 
                         <View style={styles.right}>
-                            <TouchableOpacity style={styles.cart} onPress={()=> navigation.navigate("Cart")}>
-                                <Icon name="shopping-cart" size={20} color="#fff" />
+                             <TouchableOpacity style={styles.cart} onPress={()=> navigation.navigate("Cart")}>
+                                <View style={styles.cart}>
+                                    <Text style={styles.cart_count}>{total_item}</Text>
+                                    <Icon name="shopping-cart" color="#fff" size={20} style={{marginTop: 12,}} />
+                                </View>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -102,11 +113,8 @@ const styles = StyleSheet.create({
     search: {
         flex: 1
     },
-    container: {
-        flex: 1,
-    },
     head: {
-        padding: 24,
+        paddingHorizontal: 24,
     },
     header: {
         display: "flex",
@@ -141,6 +149,13 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    cart_count: {
+        color: colors.white,
+        fontSize: 13,
+        fontWeight: 800, 
+        position: "absolute",
+        top: 6,
     },
     heading: {
         fontSize: 17,

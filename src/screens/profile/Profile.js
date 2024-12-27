@@ -1,16 +1,18 @@
 import React from "react";
-import { ScrollView, StyleSheet, View, Text, SafeAreaView, Image, TouchableOpacity } from "react-native";
-import { Header } from "../../compnents/profile";
+import { ScrollView, StyleSheet, View, Text, SafeAreaView, TouchableOpacity } from "react-native";
+import { Header } from "../../components/profile";
 import colors from "../../styles/colors";
 import Icon from "react-native-vector-icons/MaterialIcons"
+import AntIcon from "react-native-vector-icons/AntDesign"
+import FeatherIcon from "react-native-vector-icons/Feather"
 
-const Field = ({ title, url, handlePress }) => {
+const Field = ({ title, handlePress, IconType}) => {
     return (
         <TouchableOpacity onPress={handlePress}>
             <View style={[styles.row, styles.btn]}>
                 <View style={[styles.left, styles.row]}>
                     <View style={[styles.img, styles.row]}>
-                        <Image source={url} />
+                        {IconType}
                     </View>
                     <Text>{title}</Text>
                 </View>
@@ -25,52 +27,54 @@ const Profile = ({navigation}) => {
         <SafeAreaView>
             <ScrollView style={styles.container}>
                 <View style={styles.head}>
-                    <Header />
+                    <Header 
+                        goBack={()=> navigation.goBack()}
+                    />
                 </View>
 
                 <View style={styles.body}>
                     <View style={styles.field}>
                         <Field 
                             title="Personal Info"
-                            url={require("../../../assets/img/user.png")}
                             handlePress={()=> navigation.navigate("PersonalInfo")}
+                            IconType={<AntIcon name="user" color={colors.primary} size={24} />}
                         />
                         <Field 
                             title="Address"
-                            url={require("../../../assets/img/map.png")}
                             handlePress={()=> navigation.navigate("Address")}
+                            IconType={<FeatherIcon name="map" color="#413DFB" size={20} />}
                         />
                     </View>
 
                     <View style={styles.field}>
                         <Field 
                             title="Cart"
-                            url={require("../../../assets/img/cart-alt.png")}
-                            handlePress={()=> navigation.navigate("PersonalInfo")}
+                            handlePress={()=> navigation.navigate("Cart")}
+                            IconType={<FeatherIcon name="shopping-bag" color="#369BFF" size={20} />}
                         />
                         <Field 
-                            title="Favorite"
-                            url={require("../../../assets/img/heart.png")}
-                            handlePress={()=> navigation.navigate("Address")}
+                            title="Favorites"
+                            handlePress={()=> navigation.navigate("Favorites")}
+                            IconType={<AntIcon name="heart" color="#FB4A59" size={20} />}
                         />
 
                         <Field 
                             title="Orders"
-                            url={require("../../../assets/img/map.png")}
-                            handlePress={()=> navigation.navigate("Address")}
+                            handlePress={()=> navigation.navigate("Orders")}
+                            IconType={<AntIcon name="shoppingcart" color="#413DFB" size={20} />}
                         />
                         <Field 
                             title="Payment"
-                            url={require("../../../assets/img/card.png")}
-                            handlePress={()=> navigation.navigate("Address")}
+                            handlePress={()=> navigation.navigate("Payment")}
+                            IconType={<AntIcon name="creditcard" color="#369BFF" size={20} />}
                         />
                     </View>
 
                     <View style={styles.field}>
                         <Field 
                             title="Logout"
-                            url={require("../../../assets/img/Logout.png")}
-                            handlePress={()=> navigation.navigate("PersonalInfo")}
+                            handlePress={()=> null}
+                            IconType={<Icon name="logout" color="#FB4A59" size={20} />}
                         />
                     </View>
                 </View>
@@ -84,7 +88,7 @@ const styles = StyleSheet.create({
         marginBottom: 28,
     },
     body: {
-        padding: 16,
+        padding: 24,
     },
     field: {
         backgroundColor: "#F6F8FA",

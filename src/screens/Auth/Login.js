@@ -1,9 +1,9 @@
 import React from "react";
 import { SafeAreaView, View, Text, StyleSheet, TouchableHighlight } from "react-native";
 import { Formik } from "formik";
-import Header from "../../compnents/auth/Header";
+import Header from "../../components/auth/Header";
 import colors from "../../styles/colors";
-import {Input, Submit, Checkbox} from "../../compnents/forms";
+import {Input, Submit, Checkbox} from "../../components/forms";
 import { login_schema } from "../../schema/auth";
 
 const Login = ({navigation}) => {

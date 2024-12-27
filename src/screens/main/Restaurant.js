@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text, Image, ScrollView } from "react-native";
-import { Food } from "../../compnents/cards";
-import { Header } from "../../compnents/screens";
+import { Food } from "../../components/cards";
+import { Header } from "../../components/screens";
 import colors from "../../styles/colors";
 import food from "../../data/food";
 
@@ -15,7 +15,7 @@ const Restaurant = ({navigation, route}) => {
                         <Header 
                             img_source={pictures[0]}
                             goBack={()=> navigation.goBack()}
-                            name={name}
+                            data={{name, address, about, categories, pictures}}
                             type={"Restaurant"}
                         />
                         <View style={styles.details}>

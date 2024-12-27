@@ -1,14 +1,13 @@
 import React from "react";
 import {View, StyleSheet, ImageBackground, TouchableOpacity} from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import FavoriteIcon from "react-native-vector-icons/SimpleLineIcons";
 import Favorites from "../Favorites";
 
 
 const Header = ({ 
     img_source, 
     goBack, 
-    name,
+    data,
     type,
 }) => {
     return (
@@ -21,7 +20,7 @@ const Header = ({
                         </TouchableOpacity>
 
                         <Favorites 
-                            name={name}
+                            data={data}
                             type={type}
                         />
                     </View>

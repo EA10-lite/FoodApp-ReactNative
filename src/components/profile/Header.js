@@ -35,8 +35,8 @@ const Header = ({ isEditable, canEdit, goToEdit, goBack, title="Profile"}) => {
 
 const styles = StyleSheet.create({
     nav: {
-        marginBottom: 32,
-        paddingHorizontal: 16,
+        marginBottom: 8,
+        padding: 24,
         justifyContent: "space-between",
     },
     title: {

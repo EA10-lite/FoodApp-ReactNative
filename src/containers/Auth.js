@@ -1,6 +1,6 @@
 import React from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
-import Header from "../compnents/auth/Header";
+import Header from "../components/auth/Header";
 
 const Auth = ({ children }) => {
     return (

@@ -3,7 +3,7 @@ import { Image, StyleSheet, View, Text, TouchableOpacity } from "react-native";
 
 const Food = ({ data, handlePress, }) => {
     return (
-        <TouchableOpacity onPress={handlePress} style={styles.container}>
+        <TouchableOpacity onPress={()=> handlePress(data)} style={styles.container}>
             <View style={styles.food}>
                 <View style={styles.img_box}>
                     <Image 

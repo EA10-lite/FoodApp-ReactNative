@@ -1,8 +1,8 @@
 import React from "react";
 import { ScrollView, StyleSheet, View, Text, SafeAreaView } from "react-native";
-import { Header } from "../../compnents/profile";
+import { Header } from "../../components/profile";
 import { Formik } from "formik";
-import { Input, Submit, Textbox } from "../../compnents/forms";
+import { Input, Submit, Textbox } from "../../components/forms";
 import colors from "../../styles/colors";
 
 const EditPersonalInfo = ({navigation}) => {

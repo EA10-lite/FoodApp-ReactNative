@@ -1,16 +1,14 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useCartContext } from "../../context/CartContext";
-import {Header} from "../../compnents";
-import { CartItem } from "../../compnents/cards";
+import {Header} from "../../components";
+import { CartItem } from "../../components/cards";
 import colors from "../../styles/colors";
 
 const Cart = ({navigation}) => {
     const { cart } = useCartContext();
-    console.log("cart: ", cart);
-
     return (
-        <SafeAreaView style={styles.cart}>
+        <View style={styles.cart}>
             <View style={styles.head}>
                 <Header 
                     goBack={()=> navigation.goBack()}
@@ -19,29 +17,38 @@ const Cart = ({navigation}) => {
                 />
             </View>
             <View style={styles.body}>
-                { cart?.map((item, index)=> (
-                    <CartItem 
-                        key={index}
-                        data={item}
-                    />
-                ))}
+                <ScrollView>
+                    { cart?.length > 0 ? cart?.map((item, index)=> (
+                        <CartItem 
+                            key={index}
+                            data={item}
+                        />
+                    )) : (
+                        <View style={styles.empty_cart}>
+                            <Text style={styles.title}> No Item Added </Text>
+                            <Text style={styles.subtitle}> You have not added any food to your cart! </Text>
+                        </View>
+                    )}
+                </ScrollView>
             </View>
-            <View style={styles.footer}>
-                <View style={styles.location}>
-                    <View>
-                        <Text style={styles.address_title}>Delivery Address</Text>
-                        <Text style={styles.address}>7, Shakiru Yusuf Street</Text>
-                    </View>
+            { cart?.length > 0 && (
+                <View style={styles.footer}>
+                    <View style={styles.location}>
+                        <View>
+                            <Text style={styles.address_title}>Delivery Address</Text>
+                            <Text style={styles.address}>7, Shakiru Yusuf Street</Text>
+                        </View>
 
-                    <Text style={styles.edit}> Edit </Text>
-                </View>
-                <TouchableOpacity style={styles.btn}>
-                    <View style={styles.btn_wrapper}>
-                        <Text style={styles.btn_text}>Place order</Text>
+                        <Text style={styles.edit}> Edit </Text>
                     </View>
-                </TouchableOpacity>
-            </View>
-        </SafeAreaView>
+                    <TouchableOpacity style={styles.btn}>
+                        <View style={styles.btn_wrapper}>
+                            <Text style={styles.btn_text}>Place order</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+            )}
+        </View>
     )
 }
 
@@ -49,23 +56,37 @@ const styles = StyleSheet.create({
     cart: {
         backgroundColor: colors.dark,
         flex: 1,
+        paddingTop: 80,
     },
     head: {
-        padding: 24,
+        paddingHorizontal: 24,
     },
     title: {
         color: colors.white,
+        fontSize: 17,
+        fontWeight: 600,
+        textAlign: "center"
+    },
+    subtitle: {
+        fontSize: 15,
+        fontWeight: 500,
+        color: colors.white,
+        textAlign: "center",
+        marginTop: 4,
     },
     body: {
-        flexGrow: 1,
         paddingHorizontal: 24,
+        height: "68%",
+        overflow: "hidden"
     },
 
     footer: {
         backgroundColor: colors.white,
         padding: 24,
+        paddingVertical: 32,
         borderTopLeftRadius: 32,
         borderTopRightRadius: 32,
+        height: "25%",
     },
     btn: {
         backgroundColor: colors.primary,

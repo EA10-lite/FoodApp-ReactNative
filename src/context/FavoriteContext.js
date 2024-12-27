@@ -8,12 +8,12 @@ export const useFavoriteContext = () => {
 const FavoriteProvider = ({ children }) => {
     const [favorites, setFavorites] = useState([]);
 
-    const toggleFavorites = (name, type) => {
+    const toggleFavorites = (data, type) => {
         let temp_favorites = [...favorites];
-        if(isInFavorites(name, type)) {
-            temp_favorites = temp_favorites.filter(item => !(item.name === name && item.type === type));
+        if(isInFavorites(data.name, type)) {
+            temp_favorites = temp_favorites.filter(item => !(item.name === data.name && item.type === type));
         } else {
-            temp_favorites.push({name, type});
+            temp_favorites.push({...data, type});
         }
 
         setFavorites(temp_favorites);

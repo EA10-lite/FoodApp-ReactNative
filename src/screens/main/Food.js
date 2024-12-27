@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../../styles/colors";
-import { Header } from "../../compnents/screens";
+import { Header } from "../../components/screens";
 import { useCartContext } from "../../context/CartContext";
 
 const Food = ({navigation, route}) => {
@@ -25,7 +25,7 @@ const Food = ({navigation, route}) => {
                     <Header 
                         img_source={pictures[0]}
                         goBack={()=> navigation.goBack()}
-                        name={name}
+                        data={{_id, name, price, pictures, rating, about}}
                         type={"Food"}
                     />
                     <View style={styles.details}>

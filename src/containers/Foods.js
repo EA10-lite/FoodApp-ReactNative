@@ -1,13 +1,13 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import { Restaurant } from "../components/cards";
+import { Food } from "../components/cards";
 
-const Restaurants = ({ handlePress, restaurants, seeAll, isPage }) => {
+const Foods = ({ handlePress, foods, seeAll, isPage }) => {
     return (
         <View style={styles.container}>
             { !isPage && (
                 <View style={styles.head}>
-                    <Text style={styles.title}>Restaurants </Text>
+                    <Text style={styles.title}> Fast Foods </Text>
                     { seeAll && (
                         <TouchableOpacity onPress={seeAll}>
                             <Text style={styles.btn}>See all </Text>
@@ -17,10 +17,10 @@ const Restaurants = ({ handlePress, restaurants, seeAll, isPage }) => {
             )}
 
             <View style={styles.body}>
-                {restaurants.map((restaurant, index)=> (
-                    <Restaurant 
+                {foods.map((food, index)=> (
+                    <Food 
                         key={index}
-                        data={restaurant}
+                        data={food}
                         handlePress={handlePress}
                     />
                 ))}
@@ -45,9 +45,16 @@ const styles = StyleSheet.create({
         fontWeight: 600,
         color: "#32343E",
     },
+    body: {
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        gap: "5%"
+    },
     btn: {
         color: "#32343E",
     },
 })
 
-export default Restaurants;
+export default Foods;

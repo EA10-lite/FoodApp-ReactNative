@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
-import { Category } from "../compnents/cards";
+import { Category } from "../components/cards";
 
 
 const Categories = () => {
