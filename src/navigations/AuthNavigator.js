@@ -1,16 +1,15 @@
 import * as React from 'react';
+import { Login, Signup, ForgotPassword, EmailVerification } from "../screens/Auth";
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
-import Login from '../screens/Login';
-import Signup from '../screens/Signup';
-import ForgotPassword from '../screens/ForgotPassword';
-import EmailVerification from '../screens/EmailVerification';
 
 const Stack = createNativeStackNavigator();
 
 const AuthNavigator = () => {
     return (
-        <Stack.Navigator initialRouteName='Login'>
+        <Stack.Navigator 
+            initialRouteName='Login'
+            screenOptions={{ headerShown: false }}
+        >
             <Stack.Screen
                 name="Login"
                 component={Login}

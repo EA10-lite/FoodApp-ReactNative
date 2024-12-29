@@ -2,15 +2,18 @@ import React from "react";
 import { ScrollView, StyleSheet, View, Text, Image } from "react-native";
 import { Header } from "../../components/profile";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Icon from "react-native-vector-icons/MaterialIcons"
+import AntIcon from "react-native-vector-icons/AntDesign"
+import EntIcon from "react-native-vector-icons/Entypo"
 import colors from "../../styles/colors";
 
-const Field = ({ title, url, subtitle }) => {
+const Field = ({ title, IconType, subtitle }) => {
     return (
         <View style={styles.item}>
             <View style={[styles.row, styles.btn]}>
                 <View style={[styles.left, styles.row]}>
                     <View style={[styles.img, styles.row]}>
-                        <Image source={url} />
+                        {IconType}
                     </View>
                     <View style={styles.details}>
                         <Text style={styles.title}>{title}</Text>
@@ -41,17 +44,22 @@ const PersonalInfo = ({navigation}) => {
                         <Field 
                             title="Full name"
                             subtitle="Chris Emmanuel"
-                            url={require("../../../assets/img/user.png")}
+                            IconType={<AntIcon name="user" color={colors.primary} size={24} />}
                         />
                         <Field 
                             title="Email"
                             subtitle="chris28@gmail.com"
-                            url={require("../../../assets/img/mail.png")}
+                            IconType={<AntIcon name="mail" color={"dodgerblue"} size={24} />}
                         />
                         <Field 
                             title="Phone"
                             subtitle="+234 7061 326 122"
-                            url={require("../../../assets/img/Call.png")}
+                            IconType={<Icon name="phone" color={"purple"} size={24} />}
+                            />
+                        <Field 
+                            title="Address"
+                            subtitle="8, Shakiru Yusuf Street"
+                            IconType={<EntIcon name="location-pin" color={""} size={24} />}
                         />
                     </View>
                 </View>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { Home, Food, Restaurant, Search, Foods, Restaurants, Cart } from '../screens/main';
-import { Address, EditAddress, EditPersonalInfo, PersonalInfo, Profile, Favorites, Payment, Orders } from '../screens/profile';
+import { EditPersonalInfo, PersonalInfo, Profile, Favorites, Orders } from '../screens/profile';
 
 const Stack = createNativeStackNavigator();
 
@@ -56,14 +56,6 @@ const MainNavigator = () => {
                 name="EditPersonalInfo"
                 component={EditPersonalInfo}
             />
-            <Stack.Screen
-                name="Address"
-                component={Address}
-            />
-            <Stack.Screen
-                name="EditAddress"
-                component={EditAddress}
-            />
 
             <Stack.Screen
                 name="Favorites"
@@ -72,10 +64,6 @@ const MainNavigator = () => {
             <Stack.Screen
                 name="Orders"
                 component={Orders}
-            />
-            <Stack.Screen
-                name="Payment"
-                component={Payment}
             />
         </Stack.Navigator>
     );

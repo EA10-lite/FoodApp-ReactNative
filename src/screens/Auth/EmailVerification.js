@@ -1,11 +1,11 @@
 import React from "react";
 import { SafeAreaView, View, Text, StyleSheet } from "react-native";
-import Header from "../compnents/auth/Header";
-import colors from "../styles/colors";
-import Input from "../compnents/forms/Input";
-import Submit from "../compnents/forms/Button";
 import { Formik } from "formik";
-import { forgot_password } from "../schema/auth";
+import Header from "../../components/auth/Header";
+import colors from "../../styles/colors";
+import Input from "../../components/forms/Input";
+import Submit from "../../components/forms/Button";
+import { forgot_password } from "../../schema/auth";
 
 const EmailVerification = ({navigation}) => {
     const handleLogin = (values) => {
@@ -19,6 +19,7 @@ const EmailVerification = ({navigation}) => {
                     <Header 
                         title={"Verification"}
                         subtitle={"We've sent a code to you email example@gmail.com"}
+                        goBack={()=> navigation.goBack()}
                     />
                 </View>
 

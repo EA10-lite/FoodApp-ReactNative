@@ -1,28 +1,28 @@
 import React, { useState } from "react";
 import Toast from "react-native-toast-message";
-import { SafeAreaView, View, Text, StyleSheet } from "react-native";
+import { SafeAreaView, View, Text, StyleSheet, TouchableHighlight, Button } from "react-native";
 import { Formik } from "formik";
 import Header from "../../components/auth/Header";
 import colors from "../../styles/colors";
-import Input from "../../components/forms/Input";
-import Submit from "../../components/forms/Button";
-import { forgot_password } from "../../schema/auth";
-import { forgotUserPassword } from "../../services/auth";
+import {Input, Submit} from "../../components/forms";
+import { reset_password } from "../../schema/auth";
+import { resetUserPassword } from "../../services/auth";
 
-const ForgotPassword = ({navigation}) => {
+const ResetPassword = ({navigation}) => {
+
     const [loading, setLoading] = useState(false);
-    const handleForgotPassword =  async (values) => {
+    const handleResetPassword =  async (values) => {
         try {
             setLoading(true);
-            const response = await forgotUserPassword(values);
+            const response = await resetUserPassword(values);
             if(response?.success) {
-                showToast("success", "Email sent", "Verification email sent to" + values.email)
+                showToast("success", "Password Reset", "Password successfully updated!")
             }
             else {
                 throw new Error(response?.message);
             }
         } catch (error) {
-            showToast("error", "Verification Failed",  error?.response?.data?.message || error?.message || "Something failed")
+            showToast("error", "Password Reset Failed",  error?.response?.data?.message || error?.message || "Something failed")
         } finally {
             setLoading(false);
         }
@@ -30,40 +30,47 @@ const ForgotPassword = ({navigation}) => {
 
     const showToast = (type, title, subtitle) => {
         Toast.show({
-            type,
-            text1: title,
-            text2: subtitle,
+          type,
+          text1: title,
+          text2: subtitle,
         });
     }
 
     return (
-        <SafeAreaView style={styles.forgot_password}>
+        <SafeAreaView style={styles.login}>
             <View style={styles.container}>
                 <Toast position="top" topOffset={50} />
                 <View style={styles.head}>
                     <Header 
-                        title={"Forgot Password"}
-                        goBack={()=> navigation.goBack()}
+                        title={"Reset Password"}
                     />
                 </View>
 
                 <View style={styles.body}>
                 <Formik
-                    initialValues={{ email: "" }}
-                    validationSchema={forgot_password}
-                    onSubmit={(values) => handleForgotPassword(values)}
+                    initialValues={{ new_password: "", confirm_password: "" }}
+                    validationSchema={reset_password}
+                    onSubmit={(values) => handleResetPassword(values)}
                 >
                     {()=> (
                         <View style={styles.form}>
                             <Input 
-                                type="email-address"
-                                placeholder="eg: janedoe@gmail.com"
-                                label="Email"
-                                name="email"
+                                type="default"
+                                placeholder="Enter your password"
+                                label="New Password"
+                                secureText={true}
+                                name="new_password"
+                            />
+                            <Input 
+                                type="default"
+                                placeholder="Enter your password"
+                                label="Re-type Password"
+                                secureText={true}
+                                name="confirm_password"
                             />
 
                             <Submit 
-                                title="Send code"
+                                title="log in"
                                 loading={loading}
                             />
                         </View>
@@ -76,7 +83,7 @@ const ForgotPassword = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
-    forgot_password: {
+    reset_password: {
         flex: 1,
     },
     container : {
@@ -94,9 +101,6 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 32,
         padding: 24,
     },
-    form: {
-        marginBottom: 24,
-    },
 });
 
-export default ForgotPassword;
+export default ResetPassword;

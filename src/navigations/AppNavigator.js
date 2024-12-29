@@ -1,16 +1,16 @@
 import React, {useState, useEffect} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import { Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 
 import Splash from '../screens/Splash';
 import AuthNavigator from './AuthNavigator';
 import OnboardingNavigator from './Onboarding';
+import { useGlobalContext } from '../context/GlobalContext';
+import MainNavigator from './MainNavigator';
 
 const AppNavigator = () => {
   const [isFirstTime, setIsFirstTime] = useState(null);
   const [isSplashVisible, setIsSplashVisible] = useState(true);
+  const { user } = useGlobalContext();
 
   useEffect(() => {
     const initializeApp = async () => {
@@ -34,9 +34,9 @@ const AppNavigator = () => {
   }
 
   return (
-    <NavigationContainer>
-     { isFirstTime ? <OnboardingNavigator /> : <AuthNavigator /> }
-    </NavigationContainer>
+    <>
+     { isFirstTime ? <OnboardingNavigator /> :  user ? <MainNavigator />: <AuthNavigator /> }
+    </>
   );
 };
 

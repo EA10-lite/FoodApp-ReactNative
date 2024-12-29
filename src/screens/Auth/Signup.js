@@ -1,82 +1,111 @@
-import React from "react";
+import React, { useState } from "react";
+import Toast from "react-native-toast-message";
 import { Formik } from "formik";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context"
+import { View, StyleSheet, ScrollView, SafeAreaView} from "react-native";
 
-import Header from "../compnents/auth/Header";
-import colors from "../styles/colors";
-import Input from "../compnents/forms/Input";
-import Submit from "../compnents/forms/Button";
+import Header from "../../components/auth/Header";
+import { Input, Submit } from "../../components/forms";
 
-import { signup_schema } from "../schema/auth";
+import { signup_schema } from "../../schema/auth";
+import { signupAsUser } from "../../services/auth";
+import colors from "../../styles/colors";
 
 const Signup = ({navigation}) => {
-    const handleSignup = (values) => {
-        console.log(values);
+
+    const [loading, setLoading] = useState(false);
+    const handleSignup =  async (values) => {
+        try {
+            setLoading(true);
+            const response = await signupAsUser(values);
+            if(response?.success) {
+                showToast("success", "Signup Success", "Account successfully created!")
+            }
+            else {
+                throw new Error(response?.message);
+            }
+        } catch (error) {
+            showToast("error", "Login Failed",  error?.response?.data?.message || error?.message || "Something failed")
+        } finally {
+            setLoading(false);
+        }
+    }
+
+     const showToast = (type, title, subtitle) => {
+        Toast.show({
+            type,
+            text1: title,
+            text2: subtitle,
+        });
     }
 
     return (
-        <SafeAreaProvider>
-            <SafeAreaView style={styles.signup}>
-                <View style={styles.container}>
-                    <View style={styles.head}>
-                        <Header 
-                            title={"Signup"}
-                            subtitle={"Please sign up to get started!"}
-                        />
-                    </View>
-
-                    <View style={styles.body}>
-                        <ScrollView>
-                            <Formik
-                                initialValues={{ name: "", email: "", password: "", confirm_password: "" }}
-                                validationSchema={signup_schema}
-                                onSubmit={(values) => handleSignup(values)}
-                            >
-                                {()=> (
-                                    <View style={styles.form}>
-                                        <Input 
-                                            type="default"
-                                            placeholder="Jane Doe"
-                                            label="Name"
-                                            name="name"
-                                        />
-
-                                        <Input 
-                                            type="email-address"
-                                            placeholder="eg: janedoe@gmail.com"
-                                            label="Email"
-                                            name="email"
-                                        />
-
-                                        <Input 
-                                            type="default"
-                                            placeholder="Enter your password"
-                                            label="Password"
-                                            secureText={true}
-                                            name="password"
-                                        />
-
-                                        <Input 
-                                            type="default"
-                                            placeholder="Confirm Password"
-                                            label="Re-type Password"
-                                            secureText={true}
-                                            name="confirm_password"
-                                        />
-
-                                        <Submit 
-                                            title="Sign up"
-                                        />
-                                    </View>
-                                )}
-                            </Formik>
-                            <Text style={{textAlign: 'center'}}> Already have an account? <Text style={styles.link} onPress={()=> navigation.navigate("Login")}> Sign in</Text> </Text>
-                        </ScrollView>
-                    </View>
+        <SafeAreaView style={styles.signup}>
+            <View style={styles.container}>
+                <Toast position="top" topOffset={50} />
+                <View style={styles.head}>
+                    <Header 
+                        title={"Signup"}
+                        subtitle={"Please sign up to get started!"}
+                        goBack={()=> navigation.goBack()}
+                    />
                 </View>
-            </SafeAreaView>
-        </SafeAreaProvider>
+
+                <View style={styles.body}>
+                    <ScrollView>
+                        <Formik
+                            initialValues={{ name: "", email: "", phone: "",  password: "", confirm_password: "" }}
+                            validationSchema={signup_schema}
+                            onSubmit={(values) => handleSignup(values)}
+                        >
+                            {()=> (
+                                <View style={styles.form}>
+                                    <Input 
+                                        type="default"
+                                        placeholder="Jane Doe"
+                                        label="Name"
+                                        name="name"
+                                    />
+
+                                    <Input 
+                                        type="email-address"
+                                        placeholder="eg: janedoe@gmail.com"
+                                        label="Email"
+                                        name="email"
+                                    />
+                                    <Input 
+                                        type="default"
+                                        placeholder="eg: +234 7061326122"
+                                        label="Phone"
+                                        name="phone"
+                                    />
+
+                                    <Input 
+                                        type="default"
+                                        placeholder="Enter your password"
+                                        label="Password"
+                                        secureText={true}
+                                        name="password"
+                                    />
+
+                                    <Input 
+                                        type="default"
+                                        placeholder="Confirm Password"
+                                        label="Re-type Password"
+                                        secureText={true}
+                                        name="confirm_password"
+                                    />
+
+                                    <Submit 
+                                        title="Sign up"
+                                        loading={loading}
+                                    />
+                                </View>
+                            )}
+                        </Formik>
+                    </ScrollView>
+                </View>
+            </View>
+        </SafeAreaView>
     )
 }
 
@@ -100,13 +129,11 @@ const styles = StyleSheet.create({
         marginTop: '-10%',
         borderTopRightRadius: 32,
         borderTopLeftRadius: 32,
-        padding: 24,
+        paddingVertical: 24,
     },
     form: {
         marginBottom: 12,
-    },
-    link: {
-        color: colors.primary
+        paddingHorizontal: 24,
     },
 });
 

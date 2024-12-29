@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {GlobalProvider, CartProvider, FavoriteProvider} from './src/context/';
-import { MainNavigator, ProfileNavigator } from './src/navigations';
+import { AppNavigator } from './src/navigations';
 import { NavigationContainer } from '@react-navigation/native';
 
 function App(): React.JSX.Element {
@@ -10,7 +10,7 @@ function App(): React.JSX.Element {
       <CartProvider>
         <FavoriteProvider>
           <NavigationContainer>
-            <MainNavigator />
+            <AppNavigator />
           </NavigationContainer>
         </FavoriteProvider>
       </CartProvider>

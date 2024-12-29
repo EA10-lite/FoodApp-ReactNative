@@ -40,14 +40,6 @@ const Profile = ({navigation}) => {
                             IconType={<AntIcon name="user" color={colors.primary} size={24} />}
                         />
                         <Field 
-                            title="Address"
-                            handlePress={()=> navigation.navigate("Address")}
-                            IconType={<FeatherIcon name="map" color="#413DFB" size={20} />}
-                        />
-                    </View>
-
-                    <View style={styles.field}>
-                        <Field 
                             title="Cart"
                             handlePress={()=> navigation.navigate("Cart")}
                             IconType={<FeatherIcon name="shopping-bag" color="#369BFF" size={20} />}
@@ -62,11 +54,6 @@ const Profile = ({navigation}) => {
                             title="Orders"
                             handlePress={()=> navigation.navigate("Orders")}
                             IconType={<AntIcon name="shoppingcart" color="#413DFB" size={20} />}
-                        />
-                        <Field 
-                            title="Payment"
-                            handlePress={()=> navigation.navigate("Payment")}
-                            IconType={<AntIcon name="creditcard" color="#369BFF" size={20} />}
                         />
                     </View>
 

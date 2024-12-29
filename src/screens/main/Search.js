@@ -52,7 +52,7 @@ const Search = ({navigation}) => {
                             />
 
                             { search?.length > 0 && (
-                                <Image source={require("../../../assets/img/cancel.png")} style={styles.icon} />
+                                <Icon name="close" size={16} />
                             )}
                         </View>
                     </View>

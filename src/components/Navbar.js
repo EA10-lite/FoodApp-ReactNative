@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import { useCartContext } from "../context/CartContext";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import UserIcon from "react-native-vector-icons/AntDesign";
 import colors from "../styles/colors";
 
 
@@ -19,7 +20,7 @@ const Navbar = ({ goToCart, goToProfile }) => {
             <View style={styles.navbar}>
                 <View style={styles.left}>
                     <TouchableOpacity style={styles.menu} onPress={goToProfile}>
-                        <Icon name="menu" color={colors.dark} size={24} />
+                        <UserIcon name="user" color={colors.dark} size={24} />
                      </TouchableOpacity>
                     <View style={styles.location}>
                         <Text style={styles.location}>Deliver TO</Text>

@@ -1,9 +1,10 @@
 import React from "react";
 import { ScrollView, StyleSheet, View, Text, SafeAreaView } from "react-native";
-import { Header } from "../../components/profile";
+import { Header, Map } from "../../components/profile";
 import { Formik } from "formik";
 import { Input, Submit, Textbox } from "../../components/forms";
 import colors from "../../styles/colors";
+import { profile_schema } from "../../schema/profile";
 
 const EditPersonalInfo = ({navigation}) => {
     const submitDetails = async (values) => {
@@ -22,8 +23,20 @@ const EditPersonalInfo = ({navigation}) => {
 
                 <View style={styles.form}>
                     <Formik
-                        initialValues={{ name: "", email: "", phone: "", bio: "" }}
+                        initialValues={{ 
+                            name: "", 
+                            email: "", 
+                            phone: "", 
+                            about: "",
+                            street: "",
+                            state: "",
+                            city: "",
+                            zipcode: "",
+                            longitude: "",
+                            latitude: "",
+                        }}
                         onSubmit={(values)=> submitDetails(values)}
+                        validationSchema={profile_schema}
                     >
                         {()=> (
                             <>
@@ -46,9 +59,30 @@ const EditPersonalInfo = ({navigation}) => {
                                     name="phone"
                                 />
                                 <Textbox 
-                                    name="bio"
+                                    name="about"
                                     placeholder="Tell us little about yourself (max: 100 words)"
-                                    label="Bio"
+                                    label="About (optional)"
+                                />
+
+                                <Map />
+                                
+                                <Input 
+                                    type="default"
+                                    placeholder="eg: 8, Shakiru Street"
+                                    label="Street"
+                                    name="street"
+                                />
+
+                                <Input 
+                                    type="numeric"
+                                    label="Longitude"
+                                    name="longitude"
+                                />
+
+                                <Input 
+                                    type="numeric"
+                                    label="Latitude"
+                                    name="latitude"
                                 />
 
                                 <Submit title="Submit" />
@@ -68,7 +102,6 @@ const styles = StyleSheet.create({
     },
     form: {
         paddingHorizontal: 16,
-        marginTop: 40,
     },
 });
 

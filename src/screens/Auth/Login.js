@@ -1,19 +1,45 @@
-import React from "react";
-import { SafeAreaView, View, Text, StyleSheet, TouchableHighlight } from "react-native";
+import React, { useState } from "react";
+import { SafeAreaView, View, Text, StyleSheet, TouchableHighlight, Button } from "react-native";
 import { Formik } from "formik";
 import Header from "../../components/auth/Header";
 import colors from "../../styles/colors";
 import {Input, Submit, Checkbox} from "../../components/forms";
 import { login_schema } from "../../schema/auth";
+import { loginAsUser } from "../../services/auth";
+import Toast from "react-native-toast-message";
 
 const Login = ({navigation}) => {
-    const handleLogin = (values) => {
-        console.log(values);
+
+    const [loading, setLoading] = useState(false);
+    const handleLogin =  async (values) => {
+        try {
+            setLoading(true);
+            const response = await loginAsUser(values);
+            if(response?.success) {
+                showToast("success", "Login Success", "Successfully logged in!")
+            }
+            else {
+                throw new Error(response?.message);
+            }
+        } catch (error) {
+            showToast("error", "Login Failed",  error?.response?.data?.message || error?.message || "Something failed")
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    const showToast = (type, title, subtitle) => {
+        Toast.show({
+          type,
+          text1: title,
+          text2: subtitle,
+        });
     }
 
     return (
         <SafeAreaView style={styles.login}>
             <View style={styles.container}>
+                <Toast position="top" topOffset={50} />
                 <View style={styles.head}>
                     <Header 
                         title={"Login"}
@@ -55,6 +81,7 @@ const Login = ({navigation}) => {
 
                             <Submit 
                                 title="log in"
+                                loading={loading}
                             />
                         </View>
                     )}

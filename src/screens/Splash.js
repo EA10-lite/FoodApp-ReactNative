@@ -3,7 +3,7 @@ import { Image, SafeAreaView, StyleSheet, View } from "react-native";
 
 const Splash = () => {
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <View style={styles.box}>
                 <Image 
                     source={require('../../assets/img/Logo.png')}
@@ -18,7 +18,7 @@ const Splash = () => {
                     style={styles.bottom_img}
                 />
             </View> 
-        </SafeAreaView>
+        </View>
     )
 }
 
