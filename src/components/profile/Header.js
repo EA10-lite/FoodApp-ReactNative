@@ -1,9 +1,13 @@
 import React from "react";
 import {  Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons"
+import AntIcon from "react-native-vector-icons/AntDesign"
 import colors from "../../styles/colors";
+import { useGlobalContext } from "../../context/GlobalContext";
 
 const Header = ({ isEditable, canEdit, goToEdit, goBack, title="Profile"}) => {
+    const { user } = useGlobalContext();
+
     return (
         <View style={styles.container}>
             <View style={[styles.nav, styles.row]}>
@@ -23,10 +27,11 @@ const Header = ({ isEditable, canEdit, goToEdit, goBack, title="Profile"}) => {
             { !isEditable && (
                 <View style={styles.profile}>
                     <View style={styles.profile_img}>
-                        <Image source={require("../../../assets/img/profile.jpg")} style={styles.img} />
+                        {user?.picture && <Image source={require("../../../assets/img/profile.jpg")} style={styles.img} />}
+                        {!user?.picture && <AntIcon name="user" size={40} />}
                     </View>
-                    <Text style={styles.name}>Chris Emmanuel</Text>
-                    <Text style={styles.bio}>Enough said about me, what is it that you want to know? That you don't know already!</Text>
+                    <Text style={styles.name}>{ user?.name }</Text>
+                    {user?.about && <Text style={styles.bio}>{user?.about}</Text>}
                 </View>
             )}
         </View>
@@ -65,6 +70,9 @@ const styles = StyleSheet.create({
         backgroundColor: "#FFC6AE",
         marginBottom: 12,
         overflow: "hidden",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
     },
     img: {
         width: 100,

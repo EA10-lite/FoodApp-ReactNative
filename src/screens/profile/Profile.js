@@ -5,6 +5,7 @@ import colors from "../../styles/colors";
 import Icon from "react-native-vector-icons/MaterialIcons"
 import AntIcon from "react-native-vector-icons/AntDesign"
 import FeatherIcon from "react-native-vector-icons/Feather"
+import { useGlobalContext } from "../../context/GlobalContext";
 
 const Field = ({ title, handlePress, IconType}) => {
     return (
@@ -23,6 +24,8 @@ const Field = ({ title, handlePress, IconType}) => {
 }
 
 const Profile = ({navigation}) => {
+    const { logout } = useGlobalContext();
+
     return (
         <SafeAreaView>
             <ScrollView style={styles.container}>
@@ -60,7 +63,7 @@ const Profile = ({navigation}) => {
                     <View style={styles.field}>
                         <Field 
                             title="Logout"
-                            handlePress={()=> null}
+                            handlePress={()=> logout()}
                             IconType={<Icon name="logout" color="#FB4A59" size={20} />}
                         />
                     </View>

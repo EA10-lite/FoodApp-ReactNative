@@ -16,7 +16,14 @@ const Signup = ({navigation}) => {
     const handleSignup =  async (values) => {
         try {
             setLoading(true);
-            const response = await signupAsUser(values);
+            const { email, phone, name, password } = values;
+            const response = await signupAsUser({
+                email,
+                phone, 
+                name,
+                password
+            });
+            console.log("response: ", response);
             if(response?.success) {
                 showToast("success", "Signup Success", "Account successfully created!")
             }
@@ -24,7 +31,7 @@ const Signup = ({navigation}) => {
                 throw new Error(response?.message);
             }
         } catch (error) {
-            showToast("error", "Login Failed",  error?.response?.data?.message || error?.message || "Something failed")
+            showToast("error", "Signup Failed",  error?.response?.data?.message || error?.message || "Something failed")
         } finally {
             setLoading(false);
         }

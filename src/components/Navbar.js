@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
+import { useGlobalContext } from "../context/GlobalContext";
 import { useCartContext } from "../context/CartContext";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import UserIcon from "react-native-vector-icons/AntDesign";
@@ -7,6 +8,7 @@ import colors from "../styles/colors";
 
 
 const Navbar = ({ goToCart, goToProfile }) => {
+    const { user } = useGlobalContext();
     const { cart } = useCartContext();
 
     let total_item = 0;
@@ -24,7 +26,7 @@ const Navbar = ({ goToCart, goToProfile }) => {
                      </TouchableOpacity>
                     <View style={styles.location}>
                         <Text style={styles.location}>Deliver TO</Text>
-                        <Text style={styles.address}>Igbe Road, Off Dr. Bakare</Text>
+                        <Text style={styles.address}>{ user?.address || "No Address added"}</Text>
                     </View>
                 </View>
 
@@ -38,7 +40,7 @@ const Navbar = ({ goToCart, goToProfile }) => {
                 </View>
             </View>
 
-            <Text style={styles.greeting}>Hello Chris, <Text style={styles.bold}>Good Afternoon!</Text></Text>
+            <Text style={styles.greeting}>Hello {user?.name?.split(" ")[0]}, <Text style={styles.bold}>Good Afternoon!</Text></Text>
         </View>
     )
 }

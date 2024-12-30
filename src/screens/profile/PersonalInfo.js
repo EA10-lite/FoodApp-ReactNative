@@ -6,6 +6,7 @@ import Icon from "react-native-vector-icons/MaterialIcons"
 import AntIcon from "react-native-vector-icons/AntDesign"
 import EntIcon from "react-native-vector-icons/Entypo"
 import colors from "../../styles/colors";
+import { useGlobalContext } from "../../context/GlobalContext";
 
 const Field = ({ title, IconType, subtitle }) => {
     return (
@@ -26,6 +27,7 @@ const Field = ({ title, IconType, subtitle }) => {
 }
 
 const PersonalInfo = ({navigation}) => {
+    const { user } = useGlobalContext();
     return (
         <SafeAreaView>
             <ScrollView style={styles.container}>
@@ -43,22 +45,22 @@ const PersonalInfo = ({navigation}) => {
                     <View style={styles.field}>
                         <Field 
                             title="Full name"
-                            subtitle="Chris Emmanuel"
+                            subtitle={user?.name}
                             IconType={<AntIcon name="user" color={colors.primary} size={24} />}
                         />
                         <Field 
                             title="Email"
-                            subtitle="chris28@gmail.com"
+                            subtitle={user?.email}
                             IconType={<AntIcon name="mail" color={"dodgerblue"} size={24} />}
                         />
                         <Field 
                             title="Phone"
-                            subtitle="+234 7061 326 122"
+                            subtitle={user?.phone || "Not set"}
                             IconType={<Icon name="phone" color={"purple"} size={24} />}
                             />
                         <Field 
                             title="Address"
-                            subtitle="8, Shakiru Yusuf Street"
+                            subtitle={user?.address || "Not set"}
                             IconType={<EntIcon name="location-pin" color={""} size={24} />}
                         />
                     </View>

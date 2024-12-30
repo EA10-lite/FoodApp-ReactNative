@@ -1,22 +1,25 @@
 import React, { useState } from "react";
+import Toast from "react-native-toast-message";
 import { SafeAreaView, View, Text, StyleSheet, TouchableHighlight, Button } from "react-native";
+import { useGlobalContext } from "../../context/GlobalContext";
 import { Formik } from "formik";
+
 import Header from "../../components/auth/Header";
-import colors from "../../styles/colors";
 import {Input, Submit, Checkbox} from "../../components/forms";
 import { login_schema } from "../../schema/auth";
 import { loginAsUser } from "../../services/auth";
-import Toast from "react-native-toast-message";
+import colors from "../../styles/colors";
 
 const Login = ({navigation}) => {
-
+    const { login } = useGlobalContext();
     const [loading, setLoading] = useState(false);
     const handleLogin =  async (values) => {
         try {
             setLoading(true);
             const response = await loginAsUser(values);
             if(response?.success) {
-                showToast("success", "Login Success", "Successfully logged in!")
+                showToast("success", "Login Success", "Successfully logged in!");
+                login(response?.result);
             }
             else {
                 throw new Error(response?.message);

@@ -2,7 +2,7 @@ import {fetchWithAuth} from './api';
 
 export const loginAsUser = async (data) => {
     try {
-      return await fetchWithAuth('/auth/login', {
+      return await fetchWithAuth('/auth/loginUser', {
         method: 'POST',
         body: JSON.stringify(data),
       });
