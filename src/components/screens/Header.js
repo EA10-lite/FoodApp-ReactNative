@@ -1,7 +1,7 @@
 import React from "react";
 import {View, StyleSheet, ImageBackground, TouchableOpacity} from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import Favorites from "../Favorites";
+import Favorites from "../main/Favorites";
 
 
 const Header = ({ 

@@ -2,7 +2,7 @@ import React from "react";
 import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
 import { Foods as FoodContainer } from "../../containers";
 import food from "../../data/food";
-import { Header } from "../../components";
+import { Header } from "../../components/main";
 
 const Foods= ({navigation}) => {
     return (

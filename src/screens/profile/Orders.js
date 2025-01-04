@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { SafeAreaView, StyleSheet, View, ScrollView, Text } from "react-native";
-import { Header } from "../../components";
+import { Header } from "../../components/main";
 import colors from "../../styles/colors";
 import { OrderItem } from "../../components/cards";
 

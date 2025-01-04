@@ -4,6 +4,8 @@ import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../../styles/colors";
 import { Header } from "../../components/screens";
 import { useCartContext } from "../../context/CartContext";
+import food from "../../data/food";
+import { Foods } from "../../containers";
 
 const Food = ({navigation, route}) => {
     const { _id, name, about, ingredients, pictures, restaurant, price, rating, time} = route.params;
@@ -59,16 +61,6 @@ const Food = ({navigation, route}) => {
                     </View>
 
                     <Text style={styles.desc}>{about}</Text>
-
-                    <View style={styles.ingredients}>
-                        <Text style={styles.heading}>Ingredients</Text>
-
-                        <View>
-                            {ingredients.map((ingredient, index)=> (
-                                <Text style={styles.ingredient} key={index}>{ingredient}</Text>
-                            ))}
-                        </View>
-                    </View>
                 </View> 
 
                 <View style={styles.footer}>
@@ -93,11 +85,15 @@ const Food = ({navigation, route}) => {
                             </View>
                         )}
                     </View>
-                    
-                    <TouchableOpacity style={styles.checkout_btn}>
-                        <Text style={styles.btn_text}> Proceed to checkout </Text>
-                     </TouchableOpacity>
                 </View> 
+
+                <View style={styles.similar}>
+                    <Foods 
+                        foods={food.slice(0, 4)}
+                        handlePress={(data)=> navigation.navigate("FoodDetails", data)}
+                        title="Similar Dish"
+                    />
+                </View>
             </View>
         </View>
     )
@@ -129,11 +125,9 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 600,
     },
-
     body: {
         padding: 16,
     },
-
     feature: {
         gap: 24,
         marginBottom: 16,
@@ -165,14 +159,6 @@ const styles = StyleSheet.create({
         fontWeight: 400,
         lineHeight: 24,
     },
-    ingredients: {
-        marginVertical: 24,
-    },
-    ingredient: {
-        fontSize: 15,
-        fontWeight: 400,
-        color: "#A0A5BA",
-    },
     heading: {
         textTransform: "uppercase",
         textDecorationLine: "underline",
@@ -183,14 +169,14 @@ const styles = StyleSheet.create({
         letterSpacing: 0.5,
     },
     footer: {
-        position: 'absolute',
-        bottom: 0,
-        padding: 12,
-        width: "100%",
-        paddingVertical: 32,
-        backgroundColor: colors.grey,
-        borderTopRightRadius: 32,
-        borderTopLeftRadius: 32,
+        // position: 'absolute',
+        // bottom: 0,
+        // padding: 12,
+        // width: "100%",
+        paddingHorizontal: 16,
+        // backgroundColor: colors.grey,
+        // borderTopRightRadius: 32,
+        // borderTopLeftRadius: 32,
     },
     checkout_btn: {
         backgroundColor: colors.primary,
@@ -232,6 +218,11 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 600,
     },
+
+    similar: {
+        marginTop: 40,
+        paddingHorizontal: 16,
+    }
 })
 
 export default Food;

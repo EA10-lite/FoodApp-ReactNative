@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
-import { useFavoriteContext } from "../context/FavoriteContext";
+import { useFavoriteContext } from "../../context/FavoriteContext";
 
 const Favorites = ({data, type}) => {
     const { toggleFavorites, isInFavorites} = useFavoriteContext();

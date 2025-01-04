@@ -1,6 +1,6 @@
 import React from "react";
 import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
-import { Navbar, Search } from "../../components";
+import { Navbar, Search } from "../../components/main";
 import { Categories, Restaurants, Foods } from "../../containers";
 import restaurant from "../../data/restaurant";
 import food from "../../data/food";

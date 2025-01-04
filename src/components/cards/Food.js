@@ -1,7 +1,12 @@
 import React from "react";
 import { Image, StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import colors from "../../styles/colors";
 
-const Food = ({ data, handlePress, }) => {
+const Food = ({ 
+    data, 
+    handlePress = () => null, 
+    isRestaurantPage
+}) => {
     return (
         <TouchableOpacity onPress={()=> handlePress(data)} style={styles.container}>
             <View style={styles.food}>
@@ -13,6 +18,7 @@ const Food = ({ data, handlePress, }) => {
                 </View>
 
                 <Text style={styles.name}>{data?.name}</Text>
+                {!isRestaurantPage && <Text style={styles.restaurant}>{data?.restaurant}</Text> }
                 <View style={styles.row}>
                     <Text style={styles.price}>{data?.price}$</Text>
                 </View>
@@ -26,7 +32,7 @@ const styles = StyleSheet.create({
         width: '47.5%',
         backgroundColor: 'white',
         borderRadius: 15,
-        padding: 16,
+        padding: 12,
     },
     img_box: {
         marginBottom: 10,
@@ -38,12 +44,17 @@ const styles = StyleSheet.create({
     },
     name: {
         fontWeight: 600,
-        fontSize: 16,
+        fontSize: 14,
         marginBottom: 2,
     },
+    restaurant: {
+        fontSize: 13, 
+        color: colors.secondary,
+    },
     price: {
-        fontSize: 14,
+        fontSize: 12,
         fontWeight: 500,
+        marginTop: 8,
     },
 })
 

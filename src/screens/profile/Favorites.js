@@ -1,7 +1,7 @@
 import React from "react";
 import { SafeAreaView, ScrollView, StyleSheet, Text, View} from "react-native";
 import { useFavoriteContext } from "../../context/FavoriteContext";
-import { Header } from "../../components";
+import { Header } from "../../components/main";
 import { Restaurants } from "../../containers";
 
 const Favorites = ({navigation}) => {

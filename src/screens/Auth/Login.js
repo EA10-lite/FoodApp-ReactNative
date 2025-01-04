@@ -25,6 +25,7 @@ const Login = ({navigation}) => {
                 throw new Error(response?.message);
             }
         } catch (error) {
+            console.log("error: ", error);
             showToast("error", "Login Failed",  error?.response?.data?.message || error?.message || "Something failed")
         } finally {
             setLoading(false);

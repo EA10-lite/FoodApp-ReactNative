@@ -1,7 +1,7 @@
 import React from "react";
 import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useCartContext } from "../../context/CartContext";
-import {Header} from "../../components";
+import {Header} from "../../components/main";
 import { CartItem } from "../../components/cards";
 import colors from "../../styles/colors";
 

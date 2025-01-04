@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import Toast from "react-native-toast-message";
-import { ScrollView, StyleSheet, View, Text, SafeAreaView } from "react-native";
-import { Header, Map } from "../../components/profile";
+import { ScrollView, StyleSheet, View, SafeAreaView, Text } from "react-native";
+import { Header } from "../../components/profile";
 import { Formik } from "formik";
-import { Input, Submit, Textbox } from "../../components/forms";
-import colors from "../../styles/colors";
+import { Input, Select, Submit, Textbox } from "../../components/forms";
 import { profile_schema } from "../../schema/profile";
 import { useGlobalContext } from "../../context/GlobalContext";
 import { updateProfile } from "../../services/profile";
+import colors from "../../styles/colors";
+import state from "../../data/state";
 
 const EditPersonalInfo = ({navigation}) => {
     const { user } = useGlobalContext();
@@ -24,6 +25,7 @@ const EditPersonalInfo = ({navigation}) => {
                 throw new Error(response?.message);
             }
         } catch (error) {
+            console.log("error: ", error);
             showToast("error", "Profile Update",  error?.response?.data?.message || error?.message || "Failed to update profile")
         } finally {
             setLoading(false);
@@ -57,16 +59,14 @@ const EditPersonalInfo = ({navigation}) => {
                                 phone: user?.phone || "", 
                                 about: user?.about || "",
                                 street: user?.address?.street || "",
-                                state: user?.address?.state || "Lagos",
-                                city: user?.address?.city || "Ikorodu",
+                                state: user?.address?.state || "",
+                                city: user?.address?.city || "",
                                 zipcode: user?.address?.zipcode ||"",
-                                longitude: user?.address?.longitude || "18.785973",
-                                latitude: user?.address?.latitude || "18.785973",
                             }}
                             onSubmit={(values)=> submitDetails(values)}
                             validationSchema={profile_schema}
                         >
-                            {()=> (
+                            {({ values })=> (
                                 <>
                                     <Input 
                                         name="name"
@@ -85,8 +85,6 @@ const EditPersonalInfo = ({navigation}) => {
                                         placeholder="Tell us little about yourself (max: 100 words)"
                                         label="About (optional)"
                                     />
-
-                                    {/* <Map /> */}
                                     
                                     <Input 
                                         type="default"
@@ -95,17 +93,22 @@ const EditPersonalInfo = ({navigation}) => {
                                         name="street"
                                     />
 
-                                    <Input 
-                                        type="numeric"
-                                        label="Longitude"
-                                        name="longitude"
+                                    <Select 
+                                        name="state"
+                                        label="State"
+                                        options={state.states}
+                                        placeholder="Select state"
                                     />
 
-                                    <Input 
-                                        type="numeric"
-                                        label="Latitude"
-                                        name="latitude"
-                                    />
+                                    { values["state"] && (
+                                        <Select 
+                                            name="city"
+                                            label="City"
+                                            placeholder="Select city"
+                                            options={state.citiesByState[values["state"]]}
+                                        />
+                                    )}
+
                                     <Input 
                                         type="numeric"
                                         label="Zipcode"

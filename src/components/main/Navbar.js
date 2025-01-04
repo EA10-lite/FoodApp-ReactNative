@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
-import { useGlobalContext } from "../context/GlobalContext";
-import { useCartContext } from "../context/CartContext";
+import { useGlobalContext } from "../../context/GlobalContext";
+import { useCartContext } from "../../context/CartContext";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import UserIcon from "react-native-vector-icons/AntDesign";
-import colors from "../styles/colors";
+import colors from "../../styles/colors";
 
 
 const Navbar = ({ goToCart, goToProfile }) => {

@@ -1,7 +1,7 @@
 import React from "react";
 import {  Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons"
-import colors from "../styles/colors";
+import colors from "../../styles/colors";
 
 const Header = ({ goBack, title, color}) => {
     return (

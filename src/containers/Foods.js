@@ -2,12 +2,12 @@ import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { Food } from "../components/cards";
 
-const Foods = ({ handlePress, foods, seeAll, isPage }) => {
+const Foods = ({ handlePress, foods, seeAll, isPage, title="Fast Foods" }) => {
     return (
         <View style={styles.container}>
             { !isPage && (
                 <View style={styles.head}>
-                    <Text style={styles.title}> Fast Foods </Text>
+                    <Text style={styles.title}> { title } </Text>
                     { seeAll && (
                         <TouchableOpacity onPress={seeAll}>
                             <Text style={styles.btn}>See all </Text>

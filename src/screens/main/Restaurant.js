@@ -53,6 +53,7 @@ const Restaurant = ({navigation, route}) => {
                                         key={index}
                                         data={food}
                                         handlePress={()=> navigation.navigate("FoodDetails", food)}
+                                        isRestaurantPage={true}
                                     />
                                 ))}
                             </View>
