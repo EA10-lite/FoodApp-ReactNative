@@ -47,7 +47,6 @@ const Search = ({navigation}) => {
                                 placeholder="Search for restaurant, food etc."
                                 value={search}
                                 onChangeText={setSearch}
-                                autoFocus={true}
                                 style={styles.input}
                             />
 
@@ -114,7 +113,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     head: {
-        paddingHorizontal: 24,
+        padding: 24,
     },
     header: {
         display: "flex",
