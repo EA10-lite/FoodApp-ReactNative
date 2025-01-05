@@ -8,7 +8,7 @@ import food from "../../data/food";
 import { Foods } from "../../containers";
 
 const Food = ({navigation, route}) => {
-    const { _id, name, about, ingredients, pictures, restaurant, price, rating, time} = route.params;
+    const { _id, name, about, pictures, restaurant, price, rating, time} = route.params;
     const { addToCart, isInCart, removeFromCart, cart } = useCartContext();
 
     const handleAddToCart = () => {
@@ -27,7 +27,7 @@ const Food = ({navigation, route}) => {
                     <Header 
                         img_source={pictures[0]}
                         goBack={()=> navigation.goBack()}
-                        data={{_id, name, price, pictures, rating, about}}
+                        data={{_id, name, price, pictures, rating, about, restaurant}}
                         type={"Food"}
                     />
                     <View style={styles.details}>

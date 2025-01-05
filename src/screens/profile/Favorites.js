@@ -2,7 +2,7 @@ import React from "react";
 import { SafeAreaView, ScrollView, StyleSheet, Text, View} from "react-native";
 import { useFavoriteContext } from "../../context/FavoriteContext";
 import { Header } from "../../components/main";
-import { Restaurants } from "../../containers";
+import { Foods, Restaurants } from "../../containers";
 
 const Favorites = ({navigation}) => {
     const { favorites } = useFavoriteContext();
@@ -24,9 +24,11 @@ const Favorites = ({navigation}) => {
                         />
                     </View>
                     <View style={styles.food}>
-                        { favorites?.filter(favorite => favorite.type === "Food")?.map((item, index)=> (
-                            <Text key={index}>{item.name}</Text>
-                        ))}
+                        <Foods 
+                            foods={favorites?.filter(favorite => favorite.type === "Food")}
+                            handlePress={(data)=> navigation.navigate("FoodDetails", data)}
+                            title="Foods"
+                        />
                     </View>
                 </View>
             </ScrollView>
