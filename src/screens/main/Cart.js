@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useCartContext } from "../../context/CartContext";
 import {Header} from "../../components/main";
 import { CartItem } from "../../components/cards";
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
         textDecorationLine: "underline",
         color: colors.primary,
         cursor: "pointer",
-    }
+    },
 })
 
 export default Cart;

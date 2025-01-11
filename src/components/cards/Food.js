@@ -1,29 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { Image, StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import colors from "../../styles/colors";
+import { FoodModal } from "../modals";
 
 const Food = ({ 
     data, 
     handlePress = () => null, 
     isRestaurantPage
 }) => {
-    return (
-        <TouchableOpacity onPress={()=> handlePress(data)} style={styles.container}>
-            <View style={styles.food}>
-                <View style={styles.img_box}>
-                    <Image 
-                        src={data?.pictures[0]} 
-                        style={styles.img}
-                    />
-                </View>
+    const [open, setOpen] = useState(false);
 
-                <Text style={styles.name}>{data?.name}</Text>
-                {!isRestaurantPage && <Text style={styles.restaurant}>{data?.restaurant}</Text> }
-                <View style={styles.row}>
-                    <Text style={styles.price}>{data?.price}$</Text>
+    return (
+        <View style={styles.container}>
+            <TouchableOpacity onPress={()=> setOpen(true)} style={styles.foodContainer}>
+                <View style={styles.food}>
+                    <View style={styles.img_box}>
+                        <Image 
+                            src={data?.pictures[0]} 
+                            style={styles.img}
+                        />
+                    </View>
+
+                    <Text style={styles.name}>{data?.name}</Text>
+                    {!isRestaurantPage && <Text style={styles.restaurant}>{data?.restaurant}</Text> }
+                    <View style={styles.row}>
+                        <Text style={styles.price}>{data?.price}$</Text>
+                    </View>
                 </View>
-            </View>
-        </TouchableOpacity>
+            </TouchableOpacity>
+
+            <FoodModal 
+                closeModal={()=> setOpen(false)}
+                isOpen={open}
+                food={data}
+            />
+        </View>
     )
 }
 
