@@ -2,7 +2,7 @@ import {fetchWithAuth} from './api';
 
 export const updateProfile = async (data) => {
     try {
-      return await fetchWithAuth('/user', {
+      return await fetchWithAuth('/user/', {
         method: 'PUT',
         body: JSON.stringify(data),
       });

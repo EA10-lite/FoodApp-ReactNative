@@ -32,8 +32,10 @@ const GlobalProvider = ({ children }) => {
 
     const getStoredData = async () => {
         const response = await AsyncStorage.getItem("user");
+        let stored_user = JSON.parse(response);
+        
         if(response) {
-            setUser(JSON.parse(response));
+            setUser(stored_user);
         }
         else {
             console.log("no user found");
@@ -48,6 +50,7 @@ const GlobalProvider = ({ children }) => {
         <GlobalContext.Provider 
             value={{
                 user,
+                setUser,
                 login,
                 logout,
             }}

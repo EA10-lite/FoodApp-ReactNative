@@ -9,9 +9,10 @@ import { useGlobalContext } from "../../context/GlobalContext";
 import { updateProfile } from "../../services/profile";
 import colors from "../../styles/colors";
 import state from "../../data/state";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const EditPersonalInfo = ({navigation}) => {
-    const { user } = useGlobalContext();
+    const { user, setUser } = useGlobalContext();
 
     const [loading, setLoading] = useState(false);
     const submitDetails = async (values) => {
@@ -19,6 +20,11 @@ const EditPersonalInfo = ({navigation}) => {
             setLoading(true);
             const response = await updateProfile(values);
             if(response?.success) {
+                let temp_data = response?.result;
+                console.log("temp_data: ", temp_data);
+                // await AsyncStorage.setItem("user", JSON.stringify(temp_data));
+                // setUser(temp_data);
+
                 showToast("success", "Profile Update", "Successfully updated your profile!")
             }
             else {

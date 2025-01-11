@@ -1,8 +1,8 @@
-import {fetchWithAuth} from './api';
+import {fetchWithoutAuth} from './api';
 
 export const loginAsUser = async (data) => {
     try {
-      return await fetchWithAuth('/auth/loginUser', {
+      return await fetchWithoutAuth('/auth/loginUser', {
         method: 'POST',
         body: JSON.stringify(data),
       });
@@ -14,7 +14,7 @@ export const loginAsUser = async (data) => {
   
   export const signupAsUser = async (data) => {
     try {
-      return await fetchWithAuth('/auth/signupUser', {
+      return await fetchWithoutAuth('/auth/signupUser', {
         method: 'POST',
         body: JSON.stringify(data),
       });
@@ -26,7 +26,7 @@ export const loginAsUser = async (data) => {
 
 export const verifyUserEmail = async (data) => {
   try {
-    return await fetchWithAuth('/auth/verify-email', {
+    return await fetchWithoutAuth('/auth/verify-email', {
       method: 'POST',
       body: JSON.stringify(data),
     });
@@ -38,7 +38,7 @@ export const verifyUserEmail = async (data) => {
 
 export const ResendOTP = async (data) => {
   try {
-    return await fetchWithAuth('/auth/forgot-password', {
+    return await fetchWithoutAuth('/auth/forgot-password', {
       method: 'POST',
       body: JSON.stringify(data),
     });
@@ -50,7 +50,7 @@ export const ResendOTP = async (data) => {
 
 export const Logout = async data => {
   try {
-    return await fetchWithAuth('/auth/logout', {
+    return await fetchWithoutAuth('/auth/logout', {
       method: 'POST',
       body: JSON.stringify({}),
     });
@@ -62,7 +62,7 @@ export const Logout = async data => {
 
 export const forgotUserPassword = async (data) => {
   try {
-    return await fetchWithAuth('/auth/forgot-password', {
+    return await fetchWithoutAuth('/auth/forgot-password', {
       method: 'POST',
       body: JSON.stringify(data),
     });
@@ -74,7 +74,7 @@ export const forgotUserPassword = async (data) => {
 
 export const resetUserPassword = async (data) => {
   try {
-    return await fetchWithAuth('/auth/reset-password', {
+    return await fetchWithoutAuth('/auth/reset-password', {
       method: 'POST',
       body: JSON.stringify(data),
     });

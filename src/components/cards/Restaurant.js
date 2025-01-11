@@ -1,5 +1,6 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import Icon from "react-native-vector-icons/Entypo"
 import colors from "../../styles/colors";
 
 
@@ -14,8 +15,19 @@ const Restaurant = ({ handlePress, data }) => {
                 </View>
                 <View style={styles.footer}>
                     <View style={styles.details}>
-                        <Text style={styles.name}>{data.name}</Text>
-                        <Text style={styles.category}>{data?.address}</Text>
+                        <View style={styles.left}>
+                            <Text style={styles.name}>{data.name}</Text>
+                            <View style={styles.row}>
+                                <Icon name="location-pin" size={20} />
+                                <Text style={styles.category}>{data?.address}</Text>
+                            </View>
+                        </View>
+
+                        <View style={styles.right}>
+                            <View style={styles.rating_box}>
+                                <Text style={styles.rating}>4.7</Text>
+                            </View>
+                        </View>
                     </View>
 
                     <View style={[styles.footer_bottom]}>
@@ -48,6 +60,7 @@ const styles = StyleSheet.create({
         fontWeight: 400,
         color: colors.dark,
         marginBottom: 4,
+        marginLeft: 26,
     },
     category: {
         color: "#A0A5BA",
@@ -59,21 +72,26 @@ const styles = StyleSheet.create({
         alignItems: "center",
         gap: 8,
     },
-    footer: {
-        padding: 10,
-    },
     footer_bottom: {
         display: "flex",
         flexDirection: "row",
-        justifyContent: "flex-end",
         gap: 7,
         flexWrap: "wrap",
-        width: "60%",
-        marginLeft: "40%",
+        display: "none",
         marginTop: 23,
     },
     details: {
-        marginBottom: 16,
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "flex-start",
+        paddingHorizontal: 16,
+        paddingVertical: 12,
+    },
+    rating: {
+        color: colors.primary,
+        fontWeight: 600,
+        fontSize: 14,
     },
     icon: {
         objectFit: "cover",

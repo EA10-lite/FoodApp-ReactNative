@@ -60,7 +60,7 @@ const PersonalInfo = ({navigation}) => {
                             />
                         <Field 
                             title="Address"
-                            subtitle={user?.address || "Not set"}
+                            subtitle={user?.address?.street || "Not set"}
                             IconType={<EntIcon name="location-pin" color={""} size={24} />}
                         />
                     </View>

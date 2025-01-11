@@ -26,7 +26,7 @@ const Navbar = ({ goToCart, goToProfile }) => {
                      </TouchableOpacity>
                     <View style={styles.location}>
                         <Text style={styles.location}>Deliver TO</Text>
-                        <Text style={styles.address}>{ user?.address || "No Address added"}</Text>
+                        <Text style={styles.address}>{ user?.address?.street || "No Address added"}</Text>
                     </View>
                 </View>
 
