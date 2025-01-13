@@ -1,7 +1,6 @@
 import React from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity, ActivityIndicator} from "react-native";
 import { useFormikContext } from "formik";
-import Icon from "react-native-vector-icons/AntDesign";
 
 import colors from "../../styles/colors";
 
@@ -10,7 +9,11 @@ const Submit = ({ title, loading, }) => {
     return (
         <View style={styles.action_btn}>
             <TouchableOpacity onPress={handleSubmit} style={styles.button}>
-                <Text style={styles.button_text}>{loading ? "Submitting..." : title}</Text>
+                { !loading ? (
+                    <Text style={styles.button_text}>{loading ? "Submitting..." : title}</Text>
+                ) : (
+                    <ActivityIndicator size="small" color={colors.white} />
+                )}
             </TouchableOpacity>
         </View>
     )

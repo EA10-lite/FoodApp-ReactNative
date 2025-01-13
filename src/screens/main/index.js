@@ -5,3 +5,5 @@ export { default as Food } from "./Food";
 export { default as Foods } from "./Foods";
 export { default as Search } from "./Search";
 export { default as Cart } from "./Cart";
+export { default as Checkout } from "./Checkout";
+export { default as Success } from "./Success";

@@ -1,6 +1,9 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import FeatherIcon from 'react-native-vector-icons/Feather';
+import EvilIcon from 'react-native-vector-icons/EvilIcons';
 import colors from "../../styles/colors";
 import { Header } from "../../components/screens";
 import { useCartContext } from "../../context/CartContext";
@@ -45,17 +48,17 @@ const Food = ({navigation, route}) => {
                 </View> 
 
                 <View style={styles.body}>
-                    <View style={[styles.row, styles.feature]}>
-                        <View style={[styles.row, styles.rating]}>
-                            <Image source={require("../../../assets/img/Star.png")} style={styles.icon} />
+                    <View style={[styles.row, styles.features]}>
+                        <View style={[styles.row, styles.feature]}>
+                            <EvilIcon name="star" size={28} color={colors.primary} />
                             <Text style={styles.p}>{rating}</Text>
                         </View>
-                        <View style={[styles.row, styles.service]}>
-                            <Image source={require("../../../assets/img/Delivery.png")} style={styles.truck} />
+                        <View style={[styles.row, styles.feature]}>
+                            <FeatherIcon name="truck" size={22} color={colors.primary} />
                             <Text style={styles.p}>Free</Text>
                         </View>
-                        <View style={[styles.row, styles.time]}>
-                            <Image source={require("../../../assets/img/Clock.png")} style={styles.icon} />
+                        <View style={[styles.row, styles.feature]}>
+                            <MaterialIcon name="access-time" size={22} color={colors.primary} />
                             <Text style={styles.p}>{time}</Text>
                         </View>
                     </View>
@@ -152,6 +155,14 @@ const styles = StyleSheet.create({
     truck: {
         width: 24,
         height: 16,
+    },
+    features: {
+        gap: 24,
+        marginBottom: 16,
+        justifyContent: "flex-start"
+    },
+    feature: {
+        gap: 5,
     },
     desc: {
         color: "#A0A5BA",

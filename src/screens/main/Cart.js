@@ -41,7 +41,7 @@ const Cart = ({navigation}) => {
 
                         <Text style={styles.edit}> Edit </Text>
                     </View>
-                    <TouchableOpacity style={styles.btn}>
+                    <TouchableOpacity style={styles.btn} onPress={()=> navigation.navigate("Checkout")}>
                         <View style={styles.btn_wrapper}>
                             <Text style={styles.btn_text}>Place order</Text>
                         </View>

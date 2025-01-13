@@ -25,9 +25,30 @@ const Orders = ({navigation}) => {
 
                     <View style={styles.fields}>
                         { active === "history" ? (
-                            <Text> History </Text>
+                            <View style={styles.items}>
+                                {[
+                                    { id: "167973", items: 2, amount_paid: 77.99 },
+                                    { id: "167793", items: 4, amount_paid: 59.99 },
+                                ].map((item, index)=> (
+                                    <OrderItem 
+                                        key={index}
+                                        order={item}
+                                        isDelivered={true}
+                                    />
+                                ))}
+                            </View>
                         ) : (
-                            <Text> Ongoing </Text>
+                            <View style={styles.items}>
+                                {[
+                                    { id: "160803", items: 3, amount_paid: 60 },
+                                    { id: "169803", items: 1, amount_paid: 25.99 },
+                                ].map((item, index)=> (
+                                    <OrderItem 
+                                        key={index}
+                                        order={item}
+                                    />
+                                ))}
+                            </View>
                         )}
                     </View>
                 </ScrollView>

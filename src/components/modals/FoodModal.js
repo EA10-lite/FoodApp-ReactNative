@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Modal, ImageBackground, TouchableOpacity, Image, ScrollView } from "react-native";
+import { StyleSheet, Text, View, Modal, ImageBackground, TouchableOpacity } from "react-native";
 import Icon from 'react-native-vector-icons/AntDesign';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import FeatherIcon from 'react-native-vector-icons/Feather';
@@ -32,77 +32,75 @@ const FoodModal = ({ closeModal, isOpen, food }) => {
             >
                 <View style={styles.modalContainer}>
                     <View style={styles.foodContainer}>
-                        <ScrollView>
-                            <View style={[styles.details, styles.head]}>
-                                <View style={[styles.row, styles.detail]}>
-                                    <View style={styles.left}>
-                                        <Text style={styles.title}>{name}</Text>
-                                        <Text style={styles.subtitle}>{restaurant}</Text>
-                                    </View>
+                        <View style={[styles.details, styles.head]}>
+                            <View style={[styles.row, styles.detail]}>
+                                <View style={styles.left}>
+                                    <Text style={styles.title}>{name}</Text>
+                                    <Text style={styles.subtitle}>{restaurant}</Text>
+                                </View>
 
-                                    <View style={styles.right}>
-                                        <Text style={styles.price}>${price}</Text>
-                                    </View>
+                                <View style={styles.right}>
+                                    <Text style={styles.price}>${price}</Text>
                                 </View>
                             </View>
+                        </View>
 
-                            <View style={styles.image_box}>
-                                <ImageBackground style={styles.image} src={pictures[0]}>
-                                    <View style={[styles.row, styles.img_btns]}>
-                                        <TouchableOpacity style={styles.icon} onPress={closeModal}>
-                                            <Icon name="close" size={18} />
-                                        </TouchableOpacity>
-
-                                        <Favorites 
-                                            data={food}
-                                            type={"Food"}
-                                        />
-                                    </View>
-                                </ImageBackground>
-                            </View>
-
-                            <View style={styles.body}>
-                                <View style={[styles.row, styles.features]}>
-                                    <View style={[styles.row, styles.feature]}>
-                                        <EvilIcon name="star" size={28} color={colors.primary} />
-                                        <Text style={styles.p}>{rating}</Text>
-                                    </View>
-                                    <View style={[styles.row, styles.feature]}>
-                                        <FeatherIcon name="truck" size={22} color={colors.primary} />
-                                        <Text style={styles.p}>Free</Text>
-                                    </View>
-                                    <View style={[styles.row, styles.feature]}>
-                                        <MaterialIcon name="access-time" size={22} color={colors.primary} />
-                                        <Text style={styles.p}>{time}</Text>
-                                    </View>
-                                </View>
-                                <Text style={styles.desc}>{ about }</Text>
-                            </View>
-
-                            <View style={styles.footer}>
-                                { !isInCart(_id) ? (
-                                    <TouchableOpacity style={styles.cart_btn} onPress={handleAddToCart}>
-                                        <Text style={styles.btn_text}> Add To cart </Text>
+                        <View style={styles.image_box}>
+                            <ImageBackground style={styles.image} src={pictures[0]}>
+                                <View style={[styles.row, styles.img_btns]}>
+                                    <TouchableOpacity style={styles.icon} onPress={closeModal}>
+                                        <Icon name="close" size={18} />
                                     </TouchableOpacity>
-                                ) : (
-                                    <View style={styles.row}>
-                                        <View>
-                                            <Text style={styles.quantity}>x{cart.find((item)=> item.id === _id).quantity} items</Text>
-                                            <Text style={styles.price}>${price * cart.find((item)=> item.id === _id).quantity}</Text>
-                                        </View>
-                                        <View style={[styles.cart, styles.row]}>
-                                            <TouchableOpacity style={styles.btn} onPress={()=> removeFromCart(_id)}>
-                                                <Icon name="minus" size={18} color={colors.white} />
-                                            </TouchableOpacity>
-                                            <Text style={styles.input}>{cart.find((item)=> item.id === _id).quantity}</Text>
-                                            <TouchableOpacity style={styles.btn} onPress={handleAddToCart}>
-                                                <Icon name="plus" size={18} color={colors.white} />
-                                            </TouchableOpacity>
-                                        </View>
-                                    </View>
-                                )}
+
+                                    <Favorites 
+                                        data={food}
+                                        type={"Food"}
+                                    />
+                                </View>
+                            </ImageBackground>
+                        </View>
+
+                        <View style={styles.body}>
+                            <View style={[styles.row, styles.features]}>
+                                <View style={[styles.row, styles.feature]}>
+                                    <EvilIcon name="star" size={28} color={colors.primary} />
+                                    <Text style={styles.p}>{rating}</Text>
+                                </View>
+                                <View style={[styles.row, styles.feature]}>
+                                    <FeatherIcon name="truck" size={22} color={colors.primary} />
+                                    <Text style={styles.p}>Free</Text>
+                                </View>
+                                <View style={[styles.row, styles.feature]}>
+                                    <MaterialIcon name="access-time" size={22} color={colors.primary} />
+                                    <Text style={styles.p}>{time}</Text>
+                                </View>
                             </View>
-                        </ScrollView>
+                            <Text style={styles.desc}>{ about }</Text>
+                        </View>
+
+                        <View style={styles.footer}>
+                            { !isInCart(_id) ? (
+                                <TouchableOpacity style={styles.cart_btn} onPress={handleAddToCart}>
+                                    <Text style={styles.btn_text}> Add To cart </Text>
+                                </TouchableOpacity>
+                            ) : (
+                                <View style={styles.row}>
+                                    <View>
+                                        <Text style={styles.quantity}>x{cart.find((item)=> item.id === _id).quantity} items</Text>
+                                        <Text style={styles.price}>${price * cart.find((item)=> item.id === _id).quantity}</Text>
+                                    </View>
+                                    <View style={[styles.cart, styles.row]}>
+                                        <TouchableOpacity style={styles.btn} onPress={()=> removeFromCart(_id)}>
+                                            <Icon name="minus" size={18} color={colors.white} />
+                                        </TouchableOpacity>
+                                        <Text style={styles.input}>{cart.find((item)=> item.id === _id).quantity}</Text>
+                                        <TouchableOpacity style={styles.btn} onPress={handleAddToCart}>
+                                            <Icon name="plus" size={18} color={colors.white} />
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                            )}
+                        </View>
                     </View>
                 </View>
             </Modal>
@@ -118,7 +116,7 @@ const styles= StyleSheet.create({
     },
     foodContainer: {
         backgroundColor: "#fff",
-        height: "60%",
+        minHeight: "65%",
         borderTopRightRadius: 24,
         borderTopLeftRadius: 24,
         overflow: "hidden",
@@ -185,11 +183,14 @@ const styles= StyleSheet.create({
         paddingHorizontal: 16,
     },
     footer: {
+        position: "absolute",
+        bottom: 0,
         backgroundColor: colors.grey,
         marginTop: 40,
         width: "100%",
         paddingHorizontal: 16,
-        paddingVertical: 20,
+        paddingTop: 20,
+        paddingBottom: 28,
     },
     cart_btn: {
         backgroundColor: colors.dark,

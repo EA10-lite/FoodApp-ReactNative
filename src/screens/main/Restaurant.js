@@ -2,6 +2,9 @@ import React from "react";
 import { StyleSheet, View, Text, Image, ScrollView } from "react-native";
 import { Food } from "../../components/cards";
 import { Header } from "../../components/screens";
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import FeatherIcon from 'react-native-vector-icons/Feather';
+import EvilIcon from 'react-native-vector-icons/EvilIcons';
 import colors from "../../styles/colors";
 import food from "../../data/food";
 
@@ -25,18 +28,18 @@ const Restaurant = ({navigation, route}) => {
                     </View> 
 
                     <View style={styles.body}>
-                        <View style={[styles.row, styles.feature]}>
-                            <View style={[styles.row, styles.rating]}>
-                                <Image source={require("../../../assets/img/Star.png")} style={styles.icon} />
-                                <Text style={styles.p}>4.7</Text>
+                        <View style={[styles.row, styles.features]}>
+                            <View style={[styles.row, styles.feature]}>
+                                <EvilIcon name="star" size={28} color={colors.primary} />
+                                <Text style={styles.p}> 4.7 </Text>
                             </View>
-                            <View style={[styles.row, styles.service]}>
-                                <Image source={require("../../../assets/img/Delivery.png")} style={styles.truck} />
+                            <View style={[styles.row, styles.feature]}>
+                                <FeatherIcon name="truck" size={22} color={colors.primary} />
                                 <Text style={styles.p}>Free</Text>
                             </View>
-                            <View style={[styles.row, styles.time]}>
-                                <Image source={require("../../../assets/img/Clock.png")} style={styles.icon} />
-                                <Text style={styles.p}>20min</Text>
+                            <View style={[styles.row, styles.feature]}>
+                                <MaterialIcon name="access-time" size={22} color={colors.primary} />
+                                <Text style={styles.p}>20 mins</Text>
                             </View>
                         </View>
 
@@ -93,10 +96,13 @@ const styles = StyleSheet.create({
     body: {
         padding: 16,
     },
-
-    feature: {
+    features: {
         gap: 24,
         marginBottom: 16,
+        justifyContent: "flex-start"
+    },
+    feature: {
+        gap: 5,
     },
     row: {
         display: "flex",

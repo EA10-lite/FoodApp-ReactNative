@@ -1,7 +1,25 @@
 import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import { Home, Food, Restaurant, Search, Foods, Restaurants, Cart } from '../screens/main';
-import { EditPersonalInfo, PersonalInfo, Profile, Favorites, Orders } from '../screens/profile';
+
+import { 
+    Home, 
+    Food, 
+    Restaurant, 
+    Search, 
+    Foods, 
+    Restaurants, 
+    Cart, 
+    Checkout, 
+    Success,
+} from '../screens/main';
+
+import { 
+    EditPersonalInfo, 
+    PersonalInfo, 
+    Profile, 
+    Favorites, 
+    Orders,
+} from '../screens/profile';
 
 const Stack = createNativeStackNavigator();
 
@@ -64,6 +82,17 @@ const MainNavigator = () => {
             <Stack.Screen
                 name="Orders"
                 component={Orders}
+            />
+
+
+
+            <Stack.Screen 
+                name="Checkout"
+                component={Checkout}
+            />
+            <Stack.Screen 
+                name="Success"
+                component={Success}
             />
         </Stack.Navigator>
     );
